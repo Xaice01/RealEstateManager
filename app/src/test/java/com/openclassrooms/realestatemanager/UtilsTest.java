@@ -11,7 +11,7 @@ public class UtilsTest {
     public void convertDollarToEuroTest(){
         //Given
         int dollars =100;
-        int euroConvert = (int) (dollars * Utils.ExchangeDollarsEuros);
+        int euroConvert = 81;
 
         //when
         int euroConvertForTest= Utils.convertDollarToEuro(dollars);
@@ -24,7 +24,7 @@ public class UtilsTest {
     public void convertEuroToDollarTest(){
         //Given
         int euros =100;
-        int dollarConvert = (int) (euros / Utils.ExchangeDollarsEuros);
+        int dollarConvert = 123;
 
         //when
         int dollarConvertForTest= Utils.convertEuroToDollar(euros);
