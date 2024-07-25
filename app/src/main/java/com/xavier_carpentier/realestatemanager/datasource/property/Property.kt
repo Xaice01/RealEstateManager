@@ -3,7 +3,7 @@ package com.xavier_carpentier.realestatemanager.datasource.property
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.sql.Date
+import java.util.Calendar
 
 @Entity(tableName = "property")
 data class Property(
@@ -19,8 +19,8 @@ data class Property(
     val room: Int,
     val bedroom: Int,
     val description: String,
-    val entryDate: Date,
-    val soldDate: Date,
+    val entryDate: Calendar = Calendar.getInstance(),
+    val soldDate: Calendar?,
     val sold: Boolean,
     val agent: String,
     val interestNearbySchool: Boolean,

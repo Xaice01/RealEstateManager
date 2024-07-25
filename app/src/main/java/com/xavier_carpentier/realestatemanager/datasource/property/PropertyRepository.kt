@@ -1,6 +1,5 @@
 package com.xavier_carpentier.realestatemanager.datasource.property
 
-import com.xavier_carpentier.realestatemanager.datasource.picture.Picture
 import kotlinx.coroutines.flow.Flow
 
 interface PropertyRepository {
@@ -15,7 +14,7 @@ interface PropertyRepository {
 
     fun getAllProperty() : Flow<List<Property>>
 
-    fun getPropertyAndPicture(id : Int): Flow<Map<Property, List<Picture>>?>
+    fun getPropertyAndPicture(id : Int): Flow<PropertyWithPicture?>
 
-    fun getAllPropertyAndPicture(): Flow<List<Map<Property, List<Picture>>>>
+    fun getAllPropertyAndPicture(): Flow<PropertyWithPicture>
 }

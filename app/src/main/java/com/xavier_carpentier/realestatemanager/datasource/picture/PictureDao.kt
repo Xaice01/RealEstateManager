@@ -1,5 +1,6 @@
 package com.xavier_carpentier.realestatemanager.datasource.picture
 
+import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -7,6 +8,7 @@ import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
+@Dao
 interface PictureDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(picture: Picture)
