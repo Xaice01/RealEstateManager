@@ -3,38 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@id/nav_list_property">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.xavier_carpentier.realestatemanager.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" >
+        android:id="@+id/nav_setting"
+        android:name="com.xavier_carpentier.realestatemanager.ui.setting.SettingFragment"
+        android:label="@string/menu_setting"
+        tools:layout="@layout/fragment_setting">
+        <action
+            android:id="@+id/action_nav_map_to_nav_list_property"
+            app:destination="@id/nav_list_property" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_loan"
+        android:name="com.xavier_carpentier.realestatemanager.ui.loanSimulator.LoanSimulatorFragment"
+        android:label="@string/menu_loan_simulator"
+        tools:layout="@layout/fragment_loan_simulator" >
         <action
             android:id="@+id/action_nav_home_to_nav_gallery"
-            app:destination="@id/nav_gallery" />
-        <action
-            android:id="@+id/action_nav_home_to_nav_slideshow"
-            app:destination="@id/nav_slideshow" />
+            app:destination="@id/nav_list_property" />
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.xavier_carpentier.realestatemanager.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" >
+        android:id="@+id/nav_list_property"
+        android:name="com.xavier_carpentier.realestatemanager.ui.listProperty.ListPropertyFragment"
+        android:label="@string/menu_property"
+        tools:layout="@layout/fragment_list_property" >
         <action
             android:id="@+id/action_nav_gallery_to_nav_home"
-            app:destination="@id/nav_home" />
+            app:destination="@id/nav_loan" />
+        <action
+            android:id="@+id/action_nav_list_property_to_nav_map"
+            app:destination="@id/nav_map" />
+        <action
+            android:id="@+id/action_nav_list_property_to_nav_map2"
+            app:destination="@id/nav_map" />
+        <action
+            android:id="@+id/action_nav_list_property_to_nav_setting"
+            app:destination="@id/nav_setting" />
     </fragment>
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.xavier_carpentier.realestatemanager.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" >
+        android:id="@+id/nav_map"
+        android:name="com.xavier_carpentier.realestatemanager.ui.map.MapFragment"
+        android:label="@string/menu_map"
+        tools:layout="@layout/fragment_map" >
         <action
-            android:id="@+id/action_nav_slideshow_to_nav_home"
-            app:destination="@id/nav_home" />
+            android:id="@+id/action_nav_map_to_nav_list_property"
+            app:destination="@id/nav_list_property" />
     </fragment>
 </navigation>

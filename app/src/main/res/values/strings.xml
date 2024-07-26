@@ -7,7 +7,16 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_loan_simulator">Loan Simulator</string>
+    <string name="menu_property">Property</string>
+    <string name="menu_map">Map</string>
+    <string name="menu_setting">Setting</string>
+
+    <!-- name agents -->
+    <string-array name="agent_names">
+        <item>Agent 1</item>
+        <item>Agent 2</item>
+        <item>Agent 3</item>
+    </string-array>
+
 </resources>
