@@ -3,7 +3,7 @@ package com.xavier_carpentier.realestatemanager.ui.model
 import java.util.Calendar
 
 data class PropertyUi(
-    val id: Int,
+    val id: Int=0,
     val type: String,
     val price: Long,
     val address: String,

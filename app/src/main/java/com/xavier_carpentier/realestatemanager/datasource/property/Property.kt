@@ -11,10 +11,12 @@ data class Property(
     @ColumnInfo(name = "id")
     val id: Int = 0,
     val type: String,
+    //price in Dollar
     val price: Long,
     val address: String,
     val latitude: Double,
     val longitude: Double,
+    //Surface in metre carré
     val surface: Long,
     val room: Int,
     val bedroom: Int,

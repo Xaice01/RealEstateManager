@@ -3,7 +3,7 @@ package com.xavier_carpentier.realestatemanager.domain.property.model
 import java.util.Calendar
 
 data class PropertyDomain(
-    val id: Int,
+    val id: Int=0,
     val type: String,
     val price: Long,
     val address: String,

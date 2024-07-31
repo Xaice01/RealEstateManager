@@ -32,6 +32,6 @@ interface PropertyDao {
 
     @Transaction
     @Query("SELECT * From property")
-    fun getAllPropertyAndPicture(): Flow<PropertyWithPicture>
+    fun getAllPropertyAndPicture(): Flow<List<PropertyWithPicture>>
 
 }
