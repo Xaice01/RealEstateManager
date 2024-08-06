@@ -29,6 +29,11 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:backgroundTint="?colorPrimary"
+        android:contentDescription="@string/create_home_fabButton"
+        android:tintMode="?colorOnPrimary"
+        app:shapeAppearance="@style/Theme.RealEstateManager"
+        app:srcCompat="@drawable/baseline_add_home_24"
+        tools:ignore="RedundantDescriptionCheck" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

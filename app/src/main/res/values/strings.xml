@@ -11,6 +11,8 @@
     <string name="menu_property">Property</string>
     <string name="menu_map">Map</string>
     <string name="menu_setting">Setting</string>
+    <string name="create_home_fabButton">create home fab button</string>
+
 
     <!-- name agents -->
     <string-array name="agent_names">
@@ -18,5 +20,41 @@
         <item>Agent 2</item>
         <item>Agent 3</item>
     </string-array>
+
+    <string-array name="type_property">
+        <item>House</item>
+        <item>Duplex</item>
+        <item>Penthouse</item>
+        <item>Flat</item>
+        <item>Manor</item>
+        <item>Villa</item>
+    </string-array>
+
+    <!-- create View -->
+    <string name="sold_textview">Sold :</string>
+    <string name="type_property_select">Select a type of property</string>
+    <string name="property_address_hint">Address</string>
+    <string name="description_property">description property</string>
+    <string name="select_agent">Select agent</string>
+    <string name="import_picture_button">Import Picture</string>
+    <string name="take_picture_button">Take Picture</string>
+    <string name="create_button">Create Property</string>
+    <string name="sold">Sold</string>
+    <string name="empty">Empty</string>
+    <string name="success">Success</string>
+    <string name="school">School</string>
+    <string name="shop">Shop</string>
+    <string name="park">Park</string>
+    <string name="pharmacy">Pharmacy</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="transport">Transport</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="price_in">Price in $</string>
+    <string name="surface_in_m">Surface in m²</string>
+    <string name="room_number">Room number</string>
+    <string name="bedroom_number">Bedroom number</string>
+    <string name="interest">Interest</string>
+
 
 </resources>

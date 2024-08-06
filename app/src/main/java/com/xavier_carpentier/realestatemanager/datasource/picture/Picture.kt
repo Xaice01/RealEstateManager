@@ -10,7 +10,8 @@ import com.xavier_carpentier.realestatemanager.datasource.property.Property
     foreignKeys = [ForeignKey(
         entity = Property::class,
         parentColumns = ["id"],
-        childColumns = ["propertyId"]
+        childColumns = ["propertyId"],
+        onDelete = ForeignKey.CASCADE
     )])
 data class Picture(
     @PrimaryKey(autoGenerate = true)
