@@ -45,8 +45,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintEnd_toStartOf="@+id/imageView_static_map"
                 app:layout_constraintStart_toStartOf="@+id/textView_location_title"
                 app:layout_constraintTop_toBottomOf="@+id/textView_location_title"
                 tools:text="790 Park Avenue apt 6/7A New York NY 10021 United States" />
@@ -196,13 +195,14 @@
 
             <ImageView
                 android:id="@+id/imageView_static_map"
-                android:layout_width="match_parent"
-                android:layout_height="164dp"
-                android:layout_marginTop="24dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="24dp"
                 android:contentDescription="@string/static_google_map"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_bedroom"
+                app:layout_constraintStart_toEndOf="@+id/imageButton_modify"
+                app:layout_constraintTop_toBottomOf="@+id/textView_description"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView
@@ -216,11 +216,13 @@
 
             <Button
                 android:id="@+id/imageButton_modify"
+                style="@style/Widget.Material3.Button.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Widget.Material3.Button.Icon"
+                android:layout_margin="16dp"
                 android:text="@string/modify"
                 app:icon="@drawable/baseline_edit_24"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView_location"
                 app:layout_constraintTop_toTopOf="@+id/textView_bedroom_title" />
 

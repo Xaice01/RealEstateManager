@@ -55,6 +55,20 @@
     <string name="room_number">Room number</string>
     <string name="bedroom_number">Bedroom number</string>
     <string name="interest">Interest</string>
+    <string name="static_google_map">static google map</string>
+    <string name="modify">Modify</string>
+    <string name="image_surface">image surface</string>
+    <string name="image_number_of_room">image number of room</string>
+    <string name="image_number_of_bedroom">image number of bedroom</string>
+    <string name="image_location">image location</string>
+    <string name="description">Description</string>
+    <string name="number_of_rooms">Number of rooms</string>
+    <string name="surface">Surface</string>
+    <string name="number_of_rooms_text">Number of rooms</string>
+    <string name="location">Location</string>
+    <string name="media">Media</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
 
 
 </resources>
