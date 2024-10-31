@@ -15,10 +15,6 @@ class GetAllPropertyAsFlowUseCase @Inject constructor( private val propertyRepos
             }else{
                 GetOnPropertyUseCaseResult.Success(property)
             }
-
-         //   property?.let {
-         //       PropertyWithPictureUiMapper.mapListToUi(it)
-         //   }
         }
     }
 }
