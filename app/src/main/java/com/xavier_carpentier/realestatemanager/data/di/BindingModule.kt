@@ -1,11 +1,15 @@
 package com.xavier_carpentier.realestatemanager.data.di
 
+import com.xavier_carpentier.realestatemanager.data.agent.AgentRepositoryImpl
+import com.xavier_carpentier.realestatemanager.data.current_property.CurrentPropertyRepositoryImpl
+import com.xavier_carpentier.realestatemanager.data.current_setting.CurrentSettingRepositoryImpl
+import com.xavier_carpentier.realestatemanager.domain.agent.AgentRepository
 import com.xavier_carpentier.realestatemanager.domain.current_property.CurrentPropertyRepository
+import com.xavier_carpentier.realestatemanager.domain.current_setting.CurrentSettingRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import fr.delcey.openclassrooms_master_detail_mvvm.data.current_mail.CurrentPropertyRepositoryImpl
 import javax.inject.Singleton
 
 @Module
@@ -15,5 +19,13 @@ abstract class BindingModule {
     @Singleton
     @Binds
     abstract fun bindCurrentPropertyRepository(implementation: CurrentPropertyRepositoryImpl): CurrentPropertyRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindCurrentSettingRepository(implementation: CurrentSettingRepositoryImpl): CurrentSettingRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindAgentRepositoryRepository(implementation: AgentRepositoryImpl): AgentRepository
 
 }
