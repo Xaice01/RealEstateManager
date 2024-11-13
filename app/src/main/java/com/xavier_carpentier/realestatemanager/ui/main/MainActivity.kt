@@ -5,11 +5,11 @@ import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
-import com.google.android.material.navigation.NavigationView
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.google.android.material.navigation.NavigationView
 import com.xavier_carpentier.realestatemanager.R
 import com.xavier_carpentier.realestatemanager.databinding.ActivityMainBinding
 import com.xavier_carpentier.realestatemanager.ui.create.CreatePropertyFragment
