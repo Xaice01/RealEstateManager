@@ -1,4 +1,4 @@
-package fr.delcey.openclassrooms_master_detail_mvvm.data.current_mail
+package com.xavier_carpentier.realestatemanager.data.current_property
 
 import com.xavier_carpentier.realestatemanager.domain.current_property.CurrentPropertyRepository
 import kotlinx.coroutines.flow.MutableStateFlow
