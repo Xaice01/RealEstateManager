@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     id("com.google.dagger.hilt.android")
     kotlin("kapt")
 
@@ -22,6 +23,7 @@ android {
     }
 
     buildFeatures {
+        compose=true
         viewBinding = true
     }
 
@@ -39,11 +41,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
-    buildFeatures {
-        viewBinding = true
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
     }
+
 }
 
 dependencies {
@@ -60,8 +63,36 @@ dependencies {
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.fragment.ktx)
 
+    //Compose
+    implementation(libs.activity.compose)
+    implementation (libs.androidx.ui)
+    implementation (libs.androidx.ui.tooling.preview)
+    implementation (libs.androidx.material3)
+    // Compose - Bibliothèque pour les animations
+    implementation (libs.androidx.animation)
+    // Compose - Bibliothèque pour les tests
+    androidTestImplementation (libs.androidx.ui.test.junit4)
+    // Compose - Outil pour l'aperçu et le débogage
+    debugImplementation (libs.androidx.ui.tooling)
+    debugImplementation (libs.androidx.ui.test.manifest)
+    // Compose - Integration with activities
+    implementation(libs.activity.compose)
+    // Compose - Integration with ViewModels
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    // Compose - Integration with LiveData
+    implementation(libs.androidx.runtime.livedata)
+    // Compose - custom design system based on Foundation)
+    implementation(libs.androidx.material.icons.core)
+    // Compose - Add full set of material icons
+    implementation(libs.androidx.material.icons.extended)
+
+
+
     //Room
     implementation(libs.androidx.room.runtime)
+    //implementation(libs.androidx.runtime.android)
+    //implementation(libs.androidx.runtime.desktop)
+    //implementation(libs.androidx.runtime.jvmstubs)
     //noinspection KaptUsageInsteadOfKsp
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
