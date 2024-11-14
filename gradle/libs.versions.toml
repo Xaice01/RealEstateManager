@@ -29,6 +29,7 @@ uiTestManifestVersion = "1.7.5"
 uiToolingPreviewVersion = "1.7.5"
 uiToolingVersion = "1.7.5"
 uiVersion = "1.7.5"
+uiTextGoogleFontsVersion = "1.7.5"
 
 [libraries]
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityComposeVersion" }
@@ -67,6 +68,7 @@ androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", ve
 androidx-runtime-android = { group = "androidx.compose.runtime", name = "runtime-android", version.ref = "runtimeAndroid" }
 androidx-runtime-desktop = { group = "androidx.compose.runtime", name = "runtime-desktop", version.ref = "runtimeDesktop" }
 androidx-runtime-jvmstubs = { group = "androidx.compose.runtime", name = "runtime-jvmstubs", version.ref = "runtimeJvmstubs" }
+androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFontsVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

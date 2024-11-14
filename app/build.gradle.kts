@@ -70,6 +70,7 @@ dependencies {
     implementation (libs.androidx.material3)
     // Compose - Bibliothèque pour les animations
     implementation (libs.androidx.animation)
+    implementation(libs.androidx.ui.text.google.fonts)
     // Compose - Bibliothèque pour les tests
     androidTestImplementation (libs.androidx.ui.test.junit4)
     // Compose - Outil pour l'aperçu et le débogage
