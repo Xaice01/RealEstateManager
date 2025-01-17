@@ -28,7 +28,7 @@ class ListPropertyViewModel @Inject constructor(
     val text: LiveData<String> = _text
 
 
-    val uiState:StateFlow<ListPropertyUIState> = getAllPropertyAsFlowUseCase()
+    val uiState:StateFlow<ListPropertyUIState> = getAllPropertyAsFlowUseCase.invoke()
             .map { result->
                 when (result) {
                     is GetOnPropertyUseCaseResult.Empty -> ListPropertyUIState.Empty
@@ -41,10 +41,6 @@ class ListPropertyViewModel @Inject constructor(
                 stopTimeoutMillis = 5000 // Avoid cancelling the flow on configuration change
             ),
                 initialValue = ListPropertyUIState.Loading)
-
-
-    fun getAllProperties()=getAllPropertyAsFlowUseCase.invoke()
-        //.asLiveData(viewModelScope.coroutineContext)
 
 
 

@@ -30,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.xavier_carpentier.realestatemanager.R
+import com.xavier_carpentier.realestatemanager.ui.compose.utils.IconAndText
 import com.xavier_carpentier.realestatemanager.ui.model.CurrencyUi
 import com.xavier_carpentier.realestatemanager.ui.model.PictureUi
 import com.xavier_carpentier.realestatemanager.ui.model.PropertyUi
@@ -40,7 +41,6 @@ import java.util.Calendar
 @Composable
 fun ListPropertyItem(item: PropertyWithPictureUi, currentUi :CurrencyUi, onClick: () -> Unit){
     Card(modifier = Modifier
-        .padding(8.dp)
         .fillMaxWidth(),
         elevation = CardDefaults.cardElevation(),
         colors = CardDefaults.cardColors(
@@ -86,15 +86,6 @@ fun ListPropertyItem(item: PropertyWithPictureUi, currentUi :CurrencyUi, onClick
             }
         }
 
-    }
-}
-
-@Composable
-fun IconAndText(icon: Int,description: String , text: String){
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Icon(painterResource(icon), contentDescription = description)
-        Spacer(modifier= Modifier.width(4.dp))
-        Text(text = text)
     }
 }
 

@@ -44,7 +44,7 @@ class ListPropertyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
-            // ⚠ Use `State.CREATED` (and not `State.STARTED`) to ensure the `registerForActivityResult` are functioning properly
+
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     listPropertyViewModel.uiState.collect(::onPropertyState)
