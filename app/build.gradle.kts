@@ -68,6 +68,7 @@ dependencies {
     implementation (libs.androidx.ui)
     implementation (libs.androidx.ui.tooling.preview)
     implementation (libs.androidx.material3)
+    implementation (libs.androidx.material3.window.sizeclass)
     // Compose - Bibliothèque pour les animations
     implementation (libs.androidx.animation)
     implementation(libs.androidx.ui.text.google.fonts)
@@ -86,6 +87,9 @@ dependencies {
     implementation(libs.androidx.material.icons.core)
     // Compose - Add full set of material icons
     implementation(libs.androidx.material.icons.extended)
+    // Compose - Coil for load image by URL
+    implementation(libs.coil.compose)
+
 
 
 

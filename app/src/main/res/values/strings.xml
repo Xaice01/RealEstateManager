@@ -2,8 +2,6 @@
     <string name="app_name">RealEstateManager</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -12,6 +10,7 @@
     <string name="menu_map">Map</string>
     <string name="menu_setting">Setting</string>
     <string name="create_home_fabButton">create home fab button</string>
+    <string name="detail_screen_error"> Error while loading detail screen</string>
 
 
     <!-- name agents -->
@@ -65,10 +64,15 @@
     <string name="number_of_rooms">Number of rooms</string>
     <string name="surface">Surface</string>
     <string name="number_of_rooms_text">Number of rooms</string>
+    <string name="number_of_bedroom">Number of bedrooms</string>
     <string name="location">Location</string>
     <string name="media">Media</string>
     <string name="open_nav">Open Navigation Drawer</string>
     <string name="close_nav">Close Navigation Drawer</string>
+    <string name="characteristics">Characteristics</string>
+    <string name="rooms">Rooms</string>
+    <string name="bedrooms">Bedrooms</string>
+    <string name="address">Address</string>
 
 
 </resources>

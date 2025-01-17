@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@string/number_of_rooms_text"
+                android:text="@string/number_of_bedroom"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imageView_number_bedroom"
                 app:layout_constraintTop_toTopOf="@+id/imageView_number_bedroom" />
