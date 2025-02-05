@@ -74,5 +74,15 @@
     <string name="bedrooms">Bedrooms</string>
     <string name="address">Address</string>
 
+    <!-- type property -->
+    <string name="house">house</string>
+    <string name="duplex">duplex</string>
+    <string name="penthouse">penthouse</string>
+    <string name="flat">flat</string>
+    <string name="manor">manor</string>
+    <string name="villa">villa</string>
+    <string name="other">other</string>
+    <string name="all">all</string>
+
 
 </resources>
