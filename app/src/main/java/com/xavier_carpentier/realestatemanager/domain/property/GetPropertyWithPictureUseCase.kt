@@ -11,7 +11,7 @@ class GetPropertyWithPictureUseCase @Inject constructor(private val propertyRepo
             if (property == null) {
                 GetPropertyWithPictureUseCaseResult.Empty
             } else {
-                GetPropertyWithPictureUseCaseResult.Success(property)
+                GetPropertyWithPictureUseCaseResult.Success(property) // todo modified by current currency dollar: do nothing euro: convert price
             }
         }
     }

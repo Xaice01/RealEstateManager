@@ -10,6 +10,7 @@ import javax.inject.Singleton
 @Singleton
 class CurrentPropertyRepositoryImpl @Inject constructor() : CurrentPropertyRepository {
     private val currentPropertyIdMutableSharedFlow = MutableStateFlow<Int?>(null)
+
     override val currentPropertyIdFlow: StateFlow<Int?> = currentPropertyIdMutableSharedFlow.asStateFlow()
 
     override fun setCurrentPropertyId(currentId: Int) {

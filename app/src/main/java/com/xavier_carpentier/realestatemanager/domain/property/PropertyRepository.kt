@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface PropertyRepository {
 
-    suspend fun insertProperty(propertyDomain: PropertyDomain)
+    suspend fun insertProperty(propertyDomain: PropertyDomain):Long
 
     suspend fun updateProperty(propertyDomain: PropertyDomain)
 

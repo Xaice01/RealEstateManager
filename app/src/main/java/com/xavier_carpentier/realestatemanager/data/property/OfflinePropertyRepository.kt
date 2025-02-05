@@ -12,8 +12,8 @@ import javax.inject.Inject
 class OfflinePropertyRepository @Inject constructor(private val propertyDao: PropertyDao) : PropertyRepository {
 
 
-    override suspend fun insertProperty(propertyDomain: PropertyDomain) {
-        propertyDao.insert(PropertyMapper.mapToData(propertyDomain))
+    override suspend fun insertProperty(propertyDomain: PropertyDomain):Long {
+        return propertyDao.insert(PropertyMapper.mapToData(propertyDomain))
     }
 
     override suspend fun updateProperty(propertyDomain: PropertyDomain) {

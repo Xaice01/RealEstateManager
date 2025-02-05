@@ -13,7 +13,7 @@ class GetAllPropertyAsFlowUseCase @Inject constructor( private val propertyRepos
             if (property.isNullOrEmpty()){
                 GetOnPropertyUseCaseResult.Empty
             }else{
-                GetOnPropertyUseCaseResult.Success(property)
+                GetOnPropertyUseCaseResult.Success(property)  // todo modified by current currency dollar: do nothing euro: convert price
             }
         }
     }
