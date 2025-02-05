@@ -9,6 +9,8 @@ interface PictureRepository {
 
     suspend fun updatePicture(pictureDomain: PictureDomain)
 
+    suspend fun upsertPicture(pictureDomain: PictureDomain)
+
     suspend fun deletePicture(pictureDomain: PictureDomain)
 
     fun getPicture(id :Int): Flow<PictureDomain?>

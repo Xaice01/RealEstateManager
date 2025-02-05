@@ -18,6 +18,10 @@ class OfflinePictureRepository @Inject constructor(private val pictureDao : Pict
         pictureDao.update(PictureMapper.mapToData(pictureDomain))
     }
 
+    override suspend fun upsertPicture(pictureDomain: PictureDomain) {
+        pictureDao.upsert(PictureMapper.mapToData(pictureDomain))
+    }
+
     override suspend fun deletePicture(pictureDomain: PictureDomain) {
         pictureDao.delete(PictureMapper.mapToData(pictureDomain))
     }

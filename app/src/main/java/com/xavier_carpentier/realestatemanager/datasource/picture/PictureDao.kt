@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -15,6 +16,9 @@ interface PictureDao {
 
     @Update
     suspend fun update(picture: Picture)
+
+    @Upsert
+    suspend fun upsert(picture: Picture)
 
     @Delete
     suspend fun delete(picture: Picture)
