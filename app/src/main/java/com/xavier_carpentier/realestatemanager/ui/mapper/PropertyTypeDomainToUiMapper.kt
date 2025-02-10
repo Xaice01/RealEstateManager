@@ -6,7 +6,7 @@ import com.xavier_carpentier.realestatemanager.ui.model.PropertyTypeUi
 class PropertyTypeDomainToUiMapper {
 
     fun mapToUi(domain: PropertyTypeDomain): PropertyTypeUi {
-        return PropertyTypeUi(id = domain.id, databaseName = domain.databaseName, stringRes = domain.stringRes)
+        return Triple(domain.id.toInt() , domain.databaseName , domain.stringRes)
     }
 
     fun mapListToUi(domainList: List<PropertyTypeDomain>): List<PropertyTypeUi> {
@@ -14,7 +14,7 @@ class PropertyTypeDomainToUiMapper {
     }
 
     fun mapToDomain(ui: PropertyTypeUi): PropertyTypeDomain {
-        return PropertyTypeDomain(id = ui.id, databaseName = ui.databaseName, stringRes = ui.stringRes)
+        return PropertyTypeDomain(id = ui.first.toLong(), databaseName = ui.second, stringRes = ui.third)
     }
 
     fun mapListToDomain(uiList: List<PropertyTypeUi>): List<PropertyTypeDomain> {

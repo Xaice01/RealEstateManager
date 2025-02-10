@@ -1,4 +1,4 @@
-package com.xavier_carpentier.realestatemanager.ui.compose.detail
+package com.xavier_carpentier.realestatemanager.ui.compose.utils
 
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image

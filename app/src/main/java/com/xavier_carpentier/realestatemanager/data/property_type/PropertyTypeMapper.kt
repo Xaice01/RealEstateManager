@@ -18,7 +18,7 @@ class PropertyTypeMapper @Inject constructor() {
 
     fun mapToData(propertyTypeDomain: PropertyTypeDomain): PropertyType? {
         return PropertyType.entries
-            .find { it.id == propertyTypeDomain.id && it.databaseName == propertyTypeDomain.databaseName && it.stringRes == propertyTypeDomain.stringRes }
+            .find { it.id == propertyTypeDomain.id }
     }
 
     fun mapListToData(propertyTypeDomainList: List<PropertyTypeDomain>): List<PropertyType?> {

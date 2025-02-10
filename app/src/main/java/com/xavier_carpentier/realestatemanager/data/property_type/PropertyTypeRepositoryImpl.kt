@@ -13,9 +13,7 @@ class PropertyTypeRepositoryImpl @Inject constructor(private val propertyTypeMap
         PropertyType.PENTHOUSE,
         PropertyType.FLAT,
         PropertyType.MANOR,
-        PropertyType.VILLA,
-        PropertyType.ALL,
-        PropertyType.OTHER,
+        PropertyType.VILLA
     )
 
     override fun getPropertyTypes(): List<PropertyTypeDomain> = propertyTypeMapper.mapListToDomain(propertyTypes)
@@ -26,12 +24,10 @@ enum class PropertyType(
     val databaseName: String,
     @StringRes val stringRes: Int
 ) {
-    HOUSE(1L, "House", R.string.house),
-    DUPLEX(2L, "Duplex", R.string.duplex),
-    PENTHOUSE(3L, "Penthouse", R.string.penthouse),
-    FLAT(4L, "Flat", R.string.flat),
-    MANOR(5L, "Manor", R.string.manor),
-    VILLA(6L, "Villa", R.string.villa),
-    OTHER(7L, "Other", R.string.other),
-    ALL(0L, "All", R.string.all),
+    HOUSE(0, "House", R.string.house),
+    DUPLEX(1, "Duplex", R.string.duplex),
+    PENTHOUSE(2, "Penthouse", R.string.penthouse),
+    FLAT(3, "Flat", R.string.flat),
+    MANOR(4, "Manor", R.string.manor),
+    VILLA(5, "Villa", R.string.villa)
 }

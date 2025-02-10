@@ -24,8 +24,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.xavier_carpentier.realestatemanager.R
 
 @Composable
 fun Spinner(
@@ -85,16 +87,92 @@ fun Spinner(
     }
 }
 
+// the Triple<id , databaseName , stringRes :Int>
+@Composable
+fun Spinner(
+    nameList:String,
+    list: List<Triple<Int, String, Int>>,
+    preselected: Triple<Int, String, Int>,
+    onSelectionChanged: (selection: Triple<Int, String, Int>) -> Unit
+) {
+
+    var selected by remember { mutableStateOf(preselected) }
+    var expanded by remember { mutableStateOf(false) } // initial value
+
+    Box {
+        Column {
+            OutlinedTextField(
+                value = (stringResource(selected.third)),
+                onValueChange = {  },
+                label = { Text(text = nameList) },
+                modifier = Modifier
+                    .fillMaxWidth(),
+                trailingIcon = { Icon(Icons.Outlined.ArrowDropDown, null) },
+                readOnly = true
+            )
+            DropdownMenu(
+                modifier = Modifier.fillMaxWidth(),
+                expanded = expanded,
+                onDismissRequest = { expanded = false }
+            ) {
+                list.forEach { entry ->
+
+                    DropdownMenuItem(
+                        modifier = Modifier.fillMaxWidth(),
+                        onClick = {
+                            selected = entry
+                            onSelectionChanged(selected)
+                            expanded = false
+                        },
+                        text = {
+                            Text(
+                                text = (stringResource(entry.third)),
+                                modifier = Modifier.wrapContentWidth().align(Alignment.Start))
+                        }
+                    )
+                }
+            }
+        }
+
+        Spacer(
+            modifier = Modifier
+                .matchParentSize()
+                .background(Color.Transparent)
+                .padding(10.dp)
+                .clickable(
+                    onClick = { expanded = !expanded }
+                )
+        )
+    }
+}
 
 
 @Preview(showBackground = true)
 @Composable
-fun Spinner_Preview() {
+fun Spinner_Pair_Preview() {
     MaterialTheme {
 
         val entry1 = Pair(1, "Entry1")
         val entry2 = Pair(2, "Entry2")
         val entry3 = Pair(3, "Entry3")
+
+        Spinner(
+            "list Key Entry",
+            listOf(entry1, entry2, entry3),
+            preselected = entry2,
+            onSelectionChanged = { selected -> /* do something with selected */ }
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Spinner_Triple_Preview() {
+    MaterialTheme {
+
+        val entry1 = Triple(1, "house", R.string.house)
+        val entry2 = Triple(2, "lama", R.string.flat)
+        val entry3 = Triple(3, "villa", R.string.villa)
 
         Spinner(
             "list Key Entry",
