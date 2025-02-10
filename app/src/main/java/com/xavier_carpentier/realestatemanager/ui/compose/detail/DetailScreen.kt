@@ -25,12 +25,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -41,11 +41,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.xavier_carpentier.realestatemanager.R
 import com.xavier_carpentier.realestatemanager.ui.compose.listProperty.loadImageAsByteArray
 import com.xavier_carpentier.realestatemanager.ui.compose.utils.ErrorScreen
 import com.xavier_carpentier.realestatemanager.ui.compose.utils.IconAndTextWithTitle
 import com.xavier_carpentier.realestatemanager.ui.compose.utils.LoadingScreen
+import com.xavier_carpentier.realestatemanager.ui.compose.utils.PhotoWithDescription
 import com.xavier_carpentier.realestatemanager.ui.compose.utils.ScreenType
 import com.xavier_carpentier.realestatemanager.ui.compose.utils.getScreenType
 import com.xavier_carpentier.realestatemanager.ui.detail.DetailViewModel
@@ -55,10 +57,11 @@ import com.xavier_carpentier.realestatemanager.ui.model.PropertyUi
 import com.xavier_carpentier.realestatemanager.ui.model.PropertyWithPictureUi
 import java.util.Calendar
 
+
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun DetailScreen(
-    viewModel: DetailViewModel,
+    viewModel: DetailViewModel = viewModel(),
     onModifyPressButton: () -> Unit
 ){
     val uiState by viewModel.uiState.collectAsState()
