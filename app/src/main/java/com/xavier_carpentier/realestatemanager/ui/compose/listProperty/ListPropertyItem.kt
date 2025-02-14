@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
@@ -25,7 +24,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -39,14 +37,14 @@ import com.xavier_carpentier.realestatemanager.ui.theme.AppTheme
 import java.util.Calendar
 
 @Composable
-fun ListPropertyItem(item: PropertyWithPictureUi, currentUi :CurrencyUi, onClick: () -> Unit){
+fun ListPropertyItem(item: PropertyWithPictureUi, currentUi :CurrencyUi, onClick: (item: PropertyWithPictureUi) -> Unit){
     Card(modifier = Modifier
         .fillMaxWidth(),
         elevation = CardDefaults.cardElevation(),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant
         ),
-        onClick = onClick
+        onClick = {onClick(item)}
     ){
         val image = item.picturesUi.first().image
         val bitmap = BitmapFactory.decodeByteArray(image, 0, image.size)

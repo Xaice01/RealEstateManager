@@ -60,15 +60,15 @@ class SettingFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.currentAgent.collect { agent ->
-                    val position =
-                        (binding.agentSpinner.adapter as ArrayAdapter<String>).getPosition(agent?.second)
-                    binding.agentSpinner.setSelection(position)
-                }
-            }
-        }
+       // lifecycleScope.launch {
+       //     lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+       //         viewModel.currentAgent.collect { agent ->
+       //             val position =
+       //                 (binding.agentSpinner.adapter as ArrayAdapter<String>).getPosition(agent?.second)
+       //             binding.agentSpinner.setSelection(position)
+       //         }
+       //     }
+       // }
 
 
         viewLifecycleOwner.lifecycleScope.launch {

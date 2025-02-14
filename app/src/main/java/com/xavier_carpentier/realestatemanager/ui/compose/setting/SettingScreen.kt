@@ -23,13 +23,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.xavier_carpentier.realestatemanager.ui.compose.spinner.Spinner
 import com.xavier_carpentier.realestatemanager.ui.model.CurrencyUi
 import com.xavier_carpentier.realestatemanager.ui.setting.SettingViewModel
 
 @Composable
-fun SettingScreen(viewModel: SettingViewModel = viewModel()) {
+fun SettingScreen(viewModel: SettingViewModel = hiltViewModel()) {
     val currentAgent by viewModel.currentAgent.collectAsState(initial = null)
     val selectedCurrencyUi by viewModel.selectedCurrency.collectAsState(initial = null)
     val currentDollarRate by viewModel.currentDollarRate.collectAsState(initial = null)

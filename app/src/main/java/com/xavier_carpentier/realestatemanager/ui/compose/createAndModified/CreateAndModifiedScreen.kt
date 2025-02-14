@@ -37,7 +37,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.xavier_carpentier.realestatemanager.R
 import com.xavier_carpentier.realestatemanager.ui.compose.listProperty.loadImageAsByteArray
 import com.xavier_carpentier.realestatemanager.ui.compose.spinner.Spinner
@@ -50,7 +50,7 @@ import java.util.Calendar
 @Composable
 fun CreateAndModifiedScreen(
     create : Boolean,
-    viewModel: CreatePropertyViewModel = viewModel()
+    viewModel: CreatePropertyViewModel = hiltViewModel()
 ){
     viewModel.initialised(create)
     val property by viewModel.property.collectAsState()
