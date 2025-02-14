@@ -1,26 +1,33 @@
 package com.xavier_carpentier.realestatemanager.ui.main
 
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.activity.OnBackPressedCallback
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
-import com.google.android.material.navigation.NavigationView
-import com.xavier_carpentier.realestatemanager.R
-import com.xavier_carpentier.realestatemanager.databinding.ActivityMainBinding
-import com.xavier_carpentier.realestatemanager.ui.create.CreatePropertyFragment
-import com.xavier_carpentier.realestatemanager.ui.detail.DetailFragment
-import com.xavier_carpentier.realestatemanager.ui.listProperty.ListPropertyFragment
-import com.xavier_carpentier.realestatemanager.ui.loanSimulator.LoanSimulatorFragment
-import com.xavier_carpentier.realestatemanager.ui.map.MapFragment
-import com.xavier_carpentier.realestatemanager.ui.setting.SettingFragment
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import com.xavier_carpentier.realestatemanager.ui.compose.navigation.NavigationScreen
+import com.xavier_carpentier.realestatemanager.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
+class MainActivity : ComponentActivity(){
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val viewModel: MainViewModel by viewModels()
+        setContent{
+            AppTheme {
+                val windowSizeClass = calculateWindowSizeClass(this)
+                NavigationScreen(viewModel, windowSizeClass)
+            }
+        }
+
+    }
+
+}
+
+/*@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
     private val viewModel: MainViewModel by viewModels()
@@ -108,4 +115,4 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         viewModel.onResume(resources.getBoolean(R.bool.isTablet))
     }
-}
+}*/
