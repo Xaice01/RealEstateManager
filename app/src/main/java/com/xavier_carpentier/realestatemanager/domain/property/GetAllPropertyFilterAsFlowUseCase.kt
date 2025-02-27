@@ -51,7 +51,15 @@ class GetAllPropertyFilterAsFlowUseCase @Inject constructor(
                    getAllPropertyAsFlowUseCase().map { result ->
                        when (result) {
                            is GetOnPropertyUseCaseResult.Empty -> GetOnPropertyFilterUseCaseResult.Empty
-                           is GetOnPropertyUseCaseResult.Success -> GetOnPropertyFilterUseCaseResult.Success(result.listProperty)
+                           is GetOnPropertyUseCaseResult.Success -> GetOnPropertyFilterUseCaseResult.Success(
+                               result.listProperty.map{
+                                   property -> PropertyWithPictureDomain(
+                                   property.propertyDomain.copy(
+                                       price = conversePrice.conversePriceToUi(property.propertyDomain.price)),
+                                       property.pictureDomains
+                                   )
+                               }
+                           )
                        }
                    }
                }

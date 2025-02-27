@@ -11,9 +11,11 @@ import com.xavier_carpentier.realestatemanager.ui.mapper.CurrencyDomainToUiMappe
 import com.xavier_carpentier.realestatemanager.ui.mapper.PropertyWithPictureUiMapper
 import com.xavier_carpentier.realestatemanager.ui.model.CurrencyUi
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
@@ -30,8 +32,13 @@ class ListPropertyViewModel @Inject constructor(
         .map { it?.let { currencyMapper.mapToUi(it) } }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private val propertiesFlow = selectedCurrency.flatMapLatest {
+        getAllPropertyFilterAsFlowUseCase.invoke()
+    }
+
     val uiState: StateFlow<ListPropertyUIState> = combine(
-        getAllPropertyFilterAsFlowUseCase.invoke(),
+        propertiesFlow,
         selectedCurrency
     ) { result, currency ->
         when (result) {

@@ -14,9 +14,9 @@ import com.xavier_carpentier.realestatemanager.ui.mapper.CurrencyDomainToUiMappe
 import com.xavier_carpentier.realestatemanager.ui.model.AgentUi
 import com.xavier_carpentier.realestatemanager.ui.model.CurrencyUi
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
@@ -43,14 +43,9 @@ class SettingViewModel @Inject constructor(
             initialValue = null
         )
 
+    val agents: List<AgentUi> = getAgentsUseCase().map { agentDomainToUiMapper.mapToUi(it) }
     // Expose list of agents
-    val agents: StateFlow<List<AgentUi>> = flow {
-        emit(getAgentsUseCase().map { agentDomainToUiMapper.mapToUi(it) })
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000),
-        initialValue = emptyList()
-    )
+    val agentsStateFlow: StateFlow<List<AgentUi>> = MutableStateFlow(agents)
 
     // Expose selected currency as StateFlow
     val selectedCurrency: StateFlow<CurrencyUi?> = getSelectedCurrencyUseCase()
