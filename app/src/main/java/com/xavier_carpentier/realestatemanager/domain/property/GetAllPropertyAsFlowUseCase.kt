@@ -1,11 +1,16 @@
 package com.xavier_carpentier.realestatemanager.domain.property
 
+import com.xavier_carpentier.realestatemanager.domain.current_setting.utils.ConversePrice
 import com.xavier_carpentier.realestatemanager.domain.property.model.PropertyWithPictureDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class GetAllPropertyAsFlowUseCase @Inject constructor( private val propertyRepository: PropertyRepository) {
+class GetAllPropertyAsFlowUseCase @Inject constructor(
+    private val propertyRepository: PropertyRepository,
+    private val conversePrice: ConversePrice
+
+) {
 
     operator fun invoke() : Flow<GetOnPropertyUseCaseResult> {
 
@@ -13,7 +18,10 @@ class GetAllPropertyAsFlowUseCase @Inject constructor( private val propertyRepos
             if (property.isNullOrEmpty()){
                 GetOnPropertyUseCaseResult.Empty
             }else{
-                GetOnPropertyUseCaseResult.Success(property)  // todo modified by current currency dollar: do nothing euro: convert price
+                property.map { propertyDomainWithPicture ->
+                    PropertyWithPictureDomain(propertyDomainWithPicture.propertyDomain.copy(price = conversePrice.conversePriceToUi(propertyDomainWithPicture.propertyDomain.price)), propertyDomainWithPicture.pictureDomains)
+                }
+                GetOnPropertyUseCaseResult.Success(property)
             }
         }
     }

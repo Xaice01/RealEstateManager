@@ -1,5 +1,6 @@
 package com.xavier_carpentier.realestatemanager.domain.property
 
+import com.xavier_carpentier.realestatemanager.domain.filter.model.FilterDomain
 import com.xavier_carpentier.realestatemanager.domain.property.model.PropertyDomain
 import com.xavier_carpentier.realestatemanager.domain.property.model.PropertyWithPictureDomain
 import kotlinx.coroutines.flow.Flow
@@ -19,4 +20,6 @@ interface PropertyRepository {
     fun getPropertyAndPicture(id : Int): Flow<PropertyWithPictureDomain?>
 
     fun getAllPropertyAndPicture(): Flow<List<PropertyWithPictureDomain>?>
+
+    fun getFilteredPropertyAndPicture(filter: FilterDomain): Flow<List<PropertyWithPictureDomain>?>
 }

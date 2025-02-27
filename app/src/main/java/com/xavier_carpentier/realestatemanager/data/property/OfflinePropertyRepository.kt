@@ -1,6 +1,7 @@
 package com.xavier_carpentier.realestatemanager.data.property
 
 import com.xavier_carpentier.realestatemanager.datasource.property.PropertyDao
+import com.xavier_carpentier.realestatemanager.domain.filter.model.FilterDomain
 import com.xavier_carpentier.realestatemanager.domain.property.PropertyRepository
 import com.xavier_carpentier.realestatemanager.domain.property.model.PropertyDomain
 import com.xavier_carpentier.realestatemanager.domain.property.model.PropertyWithPictureDomain
@@ -44,6 +45,46 @@ class OfflinePropertyRepository @Inject constructor(private val propertyDao: Pro
         return propertyDao.getAllPropertyAndPicture().map{
             propertyWithPicture -> propertyWithPicture.let{PropertyWithPictureMapper.mapListToDomain(it)}
         }
+    }
+
+    override fun getFilteredPropertyAndPicture(filter: FilterDomain): Flow<List<PropertyWithPictureDomain>?> {
+        val typesParameter: List<String>? = if (filter.types.isNullOrEmpty()) null else filter.types.map { it.databaseName }
+
+        return if (typesParameter == null) {
+            propertyDao.getFilteredPropertiesNoTypes(
+                minPrice = filter.minPrice,
+                maxPrice = filter.maxPrice,
+                minSurface = filter.minSurface,
+                maxSurface = filter.maxSurface,
+                sold = filter.sold,
+                nearbySchool = filter.nearbySchool,
+                nearbyShop = filter.nearbyShop,
+                nearbyPark = filter.nearbyPark,
+                nearbyRestaurant = filter.nearbyRestaurant,
+                nearbyPublicTransportation = filter.nearbyPublicTransportation,
+                nearbyPharmacy = filter.nearbyPharmacy
+            ).map {
+                    propertyWithPicture -> propertyWithPicture.let{PropertyWithPictureMapper.mapListToDomain(it)}
+            }
+        } else {
+            propertyDao.getFilteredPropertiesWithTypes(
+                types = typesParameter,
+                minPrice = filter.minPrice,
+                maxPrice = filter.maxPrice,
+                minSurface = filter.minSurface,
+                maxSurface = filter.maxSurface,
+                sold = filter.sold,
+                nearbySchool = filter.nearbySchool,
+                nearbyShop = filter.nearbyShop,
+                nearbyPark = filter.nearbyPark,
+                nearbyRestaurant = filter.nearbyRestaurant,
+                nearbyPublicTransportation = filter.nearbyPublicTransportation,
+                nearbyPharmacy = filter.nearbyPharmacy
+            ).map {
+                    propertyWithPicture -> propertyWithPicture.let{PropertyWithPictureMapper.mapListToDomain(it)}
+            }
+        }
+
     }
 
 }

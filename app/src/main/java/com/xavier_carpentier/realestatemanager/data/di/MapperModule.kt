@@ -2,6 +2,7 @@ package com.xavier_carpentier.realestatemanager.data.di
 
 import com.xavier_carpentier.realestatemanager.data.agent.AgentMapper
 import com.xavier_carpentier.realestatemanager.data.currency.CurrencyDataMapper
+import com.xavier_carpentier.realestatemanager.data.filter.model.FilterMapper
 import com.xavier_carpentier.realestatemanager.data.property_type.PropertyTypeMapper
 import dagger.Module
 import dagger.Provides
@@ -29,5 +30,11 @@ object MapperModule {
     @Singleton
     fun providePropertyTypeMapper(): PropertyTypeMapper {
         return PropertyTypeMapper()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFilterMapper(): FilterMapper {
+        return FilterMapper()
     }
 }
