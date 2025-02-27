@@ -72,11 +72,17 @@ class CreatePropertyViewModel @Inject constructor(
     private val _createMode = MutableStateFlow(false)
     val createMode: StateFlow<Boolean> = _createMode
 
+    private val _propertyCreated = MutableStateFlow<Boolean?>(null)
+    val propertyCreated: StateFlow<Boolean?> = _propertyCreated
+
+
     fun initialised(createMode: Boolean) {
+        println("DEBUG: initialisation appelée avec createMode = $createMode")
         _createMode.value = createMode
         if (!createMode) {
             viewModelScope.launch {
                 getCurrentPropertyIdUseCase().collect { propertyId ->
+                    println("DEBUG: getCurrentPropertyIdUseCase exécuté")
 
                     propertyId?.let {
                         getPropertyWithPictureUseCase(it).collect { result ->
@@ -86,11 +92,13 @@ class CreatePropertyViewModel @Inject constructor(
                                         PropertyWithPictureUiMapper.mapToUi(result.property)
                                     _property.value = propertyWithPictureUi.propertyUi
                                     _pictures.value = propertyWithPictureUi.picturesUi
+                                    println("DEBUG: Liste des images récupérées depuis le ViewModel: ${_pictures.value.size}")
                                 }
 
                                 is GetPropertyWithPictureUseCaseResult.Empty -> {
                                     _property.value = propertyWithNullValue
                                     _pictures.value = emptyList()
+                                    println("DEBUG: Aucune image trouvée, liste vidée")
                                 }
                             }
                         }
@@ -105,18 +113,20 @@ class CreatePropertyViewModel @Inject constructor(
     }
 
     fun createOrModifyProperty(property: PropertyUi) {
+        _property.value = property
         if (_createMode.value) {
-            createProperty(PropertyWithPictureUi(property, _pictures.value))
+            createProperty(PropertyWithPictureUi(_property.value, _pictures.value))
         } else {
-            updateProperty(PropertyWithPictureUi(property, _pictures.value))
+            updateProperty(PropertyWithPictureUi(_property.value, _pictures.value))
         }
     }
 
     private fun createProperty(property: PropertyWithPictureUi) {
         viewModelScope.launch {
-            insertPropertyWithPictureUseCase(
+            val isSuccess = insertPropertyWithPictureUseCase(
                 PropertyWithPictureUiMapper.mapToDomain(property)
             )
+            _propertyCreated.value = isSuccess
         }
     }
 
@@ -130,12 +140,17 @@ class CreatePropertyViewModel @Inject constructor(
 
     fun addPicture(picture: PictureUi) {
         if(_createMode.value) {
-            _pictures.value += picture
+            _pictures.value = (_pictures.value + picture).toList()
+            println("DEBUG: Nouvelle liste de photos: ${_pictures.value.size}") // Ajoute un log pour vérifier la mise à jour
         }else {
             viewModelScope.launch {
                 insertPictureUseCase(PictureUiMapper.mapToDomain(picture))
             }
         }
+    }
+
+    fun clearPropertyCreatedState() {
+        _propertyCreated.value = null
     }
 
     fun deletePicture(picture: PictureUi) {

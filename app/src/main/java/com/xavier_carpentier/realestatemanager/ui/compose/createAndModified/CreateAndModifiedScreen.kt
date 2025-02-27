@@ -23,13 +23,18 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,30 +50,64 @@ import com.xavier_carpentier.realestatemanager.ui.compose.utils.PhotoWithDescrip
 import com.xavier_carpentier.realestatemanager.ui.create.CreatePropertyViewModel
 import com.xavier_carpentier.realestatemanager.ui.model.PictureUi
 import com.xavier_carpentier.realestatemanager.ui.model.PropertyUi
+import kotlinx.coroutines.launch
 import java.util.Calendar
 
 @Composable
 fun CreateAndModifiedScreen(
     create : Boolean,
+    onBackNavigation: () -> Unit,
     viewModel: CreatePropertyViewModel = hiltViewModel()
 ){
-    viewModel.initialised(create)
-    val property by viewModel.property.collectAsState()
-    val pictures by viewModel.pictures.collectAsState()
+
+    LaunchedEffect(create) {
+        viewModel.initialised(create)
+    }
+    val propertyState by viewModel.property.collectAsState()
+    val property by remember { derivedStateOf { propertyState } }
+    val picturesState = viewModel.pictures.collectAsState()
+    val pictures by remember { derivedStateOf { picturesState.value } }
+    val createMode by viewModel.createMode.collectAsState()
+
+    LaunchedEffect(property) {
+        println("DEBUG: Propriété chargée - ${property}")
+    }
 
     CreateAndModifiedContent(
+        create = createMode,
         property = property,
         pictures = pictures,
         agentList = viewModel.getAgentList(),
         typeList = viewModel.getTypeList(),
-        onPropertyChange = { viewModel.createOrModifyProperty(property) },
+        onPropertyChange = { propertyUi -> viewModel.createOrModifyProperty(propertyUi) },
         onAddPicture = { viewModel.addPicture(it) },
         onDeletePicture = { viewModel.deletePicture(it) }
     )
+
+    
+    val propertyCreated by viewModel.propertyCreated.collectAsState()
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
+
+    LaunchedEffect(propertyCreated) {
+        propertyCreated?.let { isSuccess ->
+            coroutineScope.launch {
+                if (isSuccess) {
+                    snackbarHostState.showSnackbar("Propriété créée avec succès !")
+                    onBackNavigation()
+                } else {
+                    snackbarHostState.showSnackbar("Échec de la création de la propriété.")
+                }
+                viewModel.clearPropertyCreatedState()
+            }
+        }
+    }
+    SnackbarHost(hostState = snackbarHostState)
 }
 
 @Composable
 fun CreateAndModifiedContent(
+    create : Boolean,
     property: PropertyUi,
     pictures: List<PictureUi>,
     agentList: List<Pair<Int, String>>,
@@ -77,25 +116,28 @@ fun CreateAndModifiedContent(
     onAddPicture: (PictureUi) -> Unit,
     onDeletePicture: (PictureUi) -> Unit
 ) {
-    var selectedAgent by remember { mutableStateOf(agentList.first { it.second == property.agent }) }
-    var selectedType by remember { mutableStateOf(typeList.first { it.second == property.type }) }
-    var price by remember { mutableStateOf(TextFieldValue(property.price.toString())) }
-    var address by remember { mutableStateOf(TextFieldValue(property.address)) }
-    var latitude by remember { mutableDoubleStateOf(property.latitude) }
-    var longitude by remember { mutableDoubleStateOf(property.longitude) }
-    var surface by remember { mutableStateOf(TextFieldValue(property.surface.toString())) }
-    var room by remember { mutableStateOf(TextFieldValue(property.room.toString())) }
-    var bedroom by remember { mutableStateOf(TextFieldValue(property.bedroom.toString())) }
-    var description by remember { mutableStateOf(TextFieldValue(property.description)) }
-    var sold by remember { mutableStateOf(property.sold) }
+    var selectedAgent by remember(property) { mutableStateOf(agentList.first { it.second == property.agent }) }
+    var selectedType by remember(property) { mutableStateOf(typeList.first { it.second == property.type }) }
+    var price by remember(property) { mutableStateOf(TextFieldValue(property.price.toString())) }
+    var address by remember(property) { mutableStateOf(TextFieldValue(property.address)) }
+    var latitude by remember(property) { mutableDoubleStateOf(property.latitude) }
+    var longitude by remember(property) { mutableDoubleStateOf(property.longitude) }
+    var surface by remember(property) { mutableStateOf(TextFieldValue(property.surface.toString())) }
+    var room by remember(property) { mutableStateOf(TextFieldValue(property.room.toString())) }
+    var bedroom by remember(property) { mutableStateOf(TextFieldValue(property.bedroom.toString())) }
+    var description by remember(property) { mutableStateOf(TextFieldValue(property.description)) }
+    var sold by remember(property) { mutableStateOf(property.sold) }
 
     // Variables for the interest
-    var interestNearbySchool by remember { mutableStateOf(property.interestNearbySchool) }
-    var interestNearbyShop by remember { mutableStateOf(property.interestNearbyShop) }
-    var interestNearbyPark by remember { mutableStateOf(property.interestNearbyPark) }
-    var interestNearbyRestaurant by remember { mutableStateOf(property.interestNearbyRestaurant) }
-    var interestNearbyPublicTransportation by remember { mutableStateOf(property.interestNearbyPublicTransportation) }
-    var interestNearbyPharmacy by remember { mutableStateOf(property.interestNearbyPharmacy) }
+    var interestNearbySchool by remember(property) { mutableStateOf(property.interestNearbySchool) }
+    var interestNearbyShop by remember(property) { mutableStateOf(property.interestNearbyShop) }
+    var interestNearbyPark by remember(property) { mutableStateOf(property.interestNearbyPark) }
+    var interestNearbyRestaurant by remember(property) { mutableStateOf(property.interestNearbyRestaurant) }
+    var interestNearbyPublicTransportation by remember(property) { mutableStateOf(property.interestNearbyPublicTransportation) }
+    var interestNearbyPharmacy by remember(property) { mutableStateOf(property.interestNearbyPharmacy) }
+
+    val coroutineScope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
 
     Column(
         modifier = Modifier
@@ -103,7 +145,12 @@ fun CreateAndModifiedContent(
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {
-        Text("Éditer Propriété", style = MaterialTheme.typography.titleLarge)
+        if (create){
+            Text("Créer Propriété", style = MaterialTheme.typography.titleLarge)
+        }else{
+            Text("Éditer Propriété", style = MaterialTheme.typography.titleLarge)
+        }
+
         Spacer(modifier = Modifier.height(16.dp))
 
         Spinner(
@@ -242,11 +289,15 @@ fun CreateAndModifiedContent(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier
         ) {
+            println("DEBUG: LazyRow contient ${pictures.size} photos") // Log pour vérifier le nombre d'éléments
+
+
             items(pictures) { picture ->
                 Box(modifier= Modifier
                     .width(100.dp)
                     .height(166.dp)
                 ){
+                    println("DEBUG: Affichage de la photo avec description: ${picture.description}") // Vérifier que chaque photo passe bien ici
                     PhotoWithDescription(picture = picture)
                     IconButton(
                         onClick = { onDeletePicture(picture)},
@@ -261,22 +312,20 @@ fun CreateAndModifiedContent(
         }
 
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = {
-            val newPicture = PictureUi(
-                id = 0,
-                propertyId = property.id,
-                description = "Nouvelle photo",
-                image = ByteArray(0) // Remplace par une logique pour choisir l'image
-            )
-            onAddPicture(newPicture)
-        }) {
-            Text("Ajouter une photo")
+        Row {
+            CapturePhotoWithDescriptionButton(property.id, onAddPicture)
+
+            AddPhotoGaleryWithDescriptionButton(property.id, onAddPicture)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = {
-            onPropertyChange(
-                property.copy(
+            if (pictures.isEmpty()) {
+                coroutineScope.launch {
+                    snackbarHostState.showSnackbar("Veuillez ajouter au moins une photo")
+                }
+            } else {
+                val propertyUi = PropertyUi(
                     type = selectedType.second,
                     price = price.text.toLongOrNull() ?: 0,
                     address = address.text,
@@ -291,14 +340,20 @@ fun CreateAndModifiedContent(
                     interestNearbyPark = interestNearbyPark,
                     interestNearbyRestaurant = interestNearbyRestaurant,
                     interestNearbyPublicTransportation = interestNearbyPublicTransportation,
-                    interestNearbyPharmacy = interestNearbyPharmacy
+                    interestNearbyPharmacy = interestNearbyPharmacy,
+                    latitude = latitude,
+                    longitude = longitude,
+                    entryDate = property.entryDate,
+                    soldDate = if (property.sold && property.soldDate == null) Calendar.getInstance() else property.soldDate
                 )
-            )
+                onPropertyChange(propertyUi)
+            }
         }) {
             Text("Sauvegarder")
         }
     }
 }
+
 
 @Preview(showBackground = true, heightDp = 1250)
 @Composable
@@ -319,6 +374,7 @@ fun CreateAndModifiedScreenPreview() {
     )
 
     CreateAndModifiedContent(
+        create = false,
         property = PropertyUi(
             id = 1,
             type = "House",
