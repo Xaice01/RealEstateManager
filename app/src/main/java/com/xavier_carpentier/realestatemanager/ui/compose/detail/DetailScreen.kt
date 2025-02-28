@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -24,8 +23,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -61,8 +58,7 @@ import java.util.Calendar
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun DetailScreen(
-    viewModel: DetailViewModel = hiltViewModel(),
-    onModifyPressButton: () -> Unit
+    viewModel: DetailViewModel = hiltViewModel()
 ){
     val uiState by viewModel.uiState.collectAsState()
     val windowSizeClass = (LocalContext.current as? Activity)?.let { calculateWindowSizeClass(it) }
@@ -77,8 +73,8 @@ fun DetailScreen(
             val mapUrl = viewModel.getMapUrl()
 
             when (screenType) {
-                ScreenType.Compact -> CompactDetailContent(property, mapUrl, onModifyPressButton)
-                ScreenType.Medium, ScreenType.Expanded -> ExpandedDetailContent(property, mapUrl, onModifyPressButton)
+                ScreenType.Compact -> CompactDetailContent(property, mapUrl)
+                ScreenType.Medium, ScreenType.Expanded -> ExpandedDetailContent(property, mapUrl)
             }
         }
         is PropertyWithPictureUIState.Empty -> ErrorScreen(message = stringResource(id = R.string.detail_screen_error))
@@ -89,8 +85,7 @@ fun DetailScreen(
 @Composable
 fun CompactDetailContent(
     property: PropertyWithPictureUi,
-    mapUrl: String,
-    onModifyPressButton: () -> Unit
+    mapUrl: String
 ) {
     Column(
         modifier = Modifier
@@ -112,7 +107,7 @@ fun CompactDetailContent(
         )
         DetailSection(
             title = stringResource(R.string.location),
-            content = { DetailMapAndButtonSection(mapUrl = mapUrl, onModifyPressButton = onModifyPressButton) }
+            content = { DetailMapSection(mapUrl = mapUrl) }
         )
 
     }
@@ -121,8 +116,7 @@ fun CompactDetailContent(
 @Composable
 fun ExpandedDetailContent(
     property: PropertyWithPictureUi,
-    mapUrl: String,
-    onModifyPressButton: () -> Unit
+    mapUrl: String
 ) {
     Column (
         modifier = Modifier
@@ -165,9 +159,8 @@ fun ExpandedDetailContent(
                 DetailSection(
                     title = stringResource(R.string.location),
                     content = {
-                        DetailMapAndButtonSection(
-                            mapUrl = mapUrl,
-                            onModifyPressButton = onModifyPressButton
+                        DetailMapSection(
+                            mapUrl = mapUrl
                         )
                     }
                 )
@@ -271,7 +264,7 @@ fun InterestSection(
 }
 
 @Composable
-fun DetailMapAndButtonSection(mapUrl: String, onModifyPressButton: () -> Unit){
+fun DetailMapSection(mapUrl: String){
     Row(modifier = Modifier
         .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
@@ -283,18 +276,7 @@ fun DetailMapAndButtonSection(mapUrl: String, onModifyPressButton: () -> Unit){
                 .height(250.dp)
         )
         Spacer(modifier = Modifier.width(16.dp))
-        Button(
-            onClick = { onModifyPressButton() },
-            modifier = Modifier.height(50.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Edit,
-                contentDescription = "Edit Icon",
-                modifier = Modifier.size(24.dp)
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(text = "Modify")
-        }
+
     }
 }
 
@@ -400,9 +382,7 @@ fun CompactDetailPreview() {
 
     val propertyWithPictureUi = PropertyWithPictureUi(propertyUi, fakeList)
 
-    CompactDetailContent(propertyWithPictureUi, "") {
-        println("Button clicked")
-    }
+    CompactDetailContent(propertyWithPictureUi, "")
 }
 
 @Preview(widthDp = 800, heightDp = 600)
@@ -441,13 +421,11 @@ fun ExpandedDetailPreview() {
         interestNearbyPharmacy = true
     )
     val propertyWithPictureUi = PropertyWithPictureUi(propertyUi, fakeList)
-    ExpandedDetailContent(propertyWithPictureUi, mapUrl = ""){
-        println("Button clicked")
-    }
+    ExpandedDetailContent(propertyWithPictureUi, mapUrl = "")
 }
 
 @Preview
 @Composable
 fun DetailMapAndButtonSectionPreview() {
-    DetailMapAndButtonSection(mapUrl = "", onModifyPressButton = {})
+    DetailMapSection(mapUrl = "")
 }

@@ -153,9 +153,7 @@ fun NavigationScreen(viewModel: MainViewModel = hiltViewModel(), windowSizeClass
             }
             composable(Screen.DetailProperty.route) {
                 if (windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact){
-                    DetailScreen(
-                        onModifyPressButton = { navController.navigate("CreateAndModified/false") }
-                    )
+                    DetailScreen()
                 }else {
                     //ListPropertyScreenAndDetail(
                     //    onModifyPressButton = { navController.navigate("CreateAndModified/false") }
