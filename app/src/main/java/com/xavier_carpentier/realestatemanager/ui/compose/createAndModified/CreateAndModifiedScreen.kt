@@ -93,7 +93,12 @@ fun CreateAndModifiedScreen(
         propertyCreated?.let { isSuccess ->
             coroutineScope.launch {
                 if (isSuccess) {
-                    snackbarHostState.showSnackbar("Propriété créée avec succès !")
+                    val message = if (createMode) {
+                        "Propriété créée avec succès !"
+                    } else {
+                        "Propriété modifiée avec succès !"
+                    }
+                    snackbarHostState.showSnackbar(message)
                     onBackNavigation()
                 } else {
                     snackbarHostState.showSnackbar("Échec de la création de la propriété.")
@@ -325,7 +330,7 @@ fun CreateAndModifiedContent(
                     snackbarHostState.showSnackbar("Veuillez ajouter au moins une photo")
                 }
             } else {
-                val propertyUi = PropertyUi(
+                val propertyUi = property.copy(
                     type = selectedType.second,
                     price = price.text.toLongOrNull() ?: 0,
                     address = address.text,

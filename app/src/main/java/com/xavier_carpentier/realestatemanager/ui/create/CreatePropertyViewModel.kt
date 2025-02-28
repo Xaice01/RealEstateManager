@@ -135,6 +135,11 @@ class CreatePropertyViewModel @Inject constructor(
             updatePropertyWithPictureUseCase(
                 PropertyWithPictureUiMapper.mapToDomain(updatedProperty)
             )
+            // Mettre à jour le state local pour refléter la propriété modifiée, si nécessaire
+            _property.value = updatedProperty.propertyUi
+            // Signaler que l'opération s'est déroulée avec succès
+            _propertyCreated.value = true
+
         }
     }
 
