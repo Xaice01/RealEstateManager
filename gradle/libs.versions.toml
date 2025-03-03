@@ -4,6 +4,7 @@ agp = "8.7.2"
 animationVersion = "1.7.5"
 coilComposeVersion = "2.7.0"
 hiltCompliler = "2.51.1"
+hiltNavigationComposeVersion = "1.2.0"
 kotlin = "2.0.20"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -11,6 +12,11 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 lifecycleViewmodelCompose = "2.8.7"
+mapsComposeVersion = "4.4.1"
+mapsComposeUtilsVersion = "4.4.1"
+mapsComposeWidgetsVersion = "4.4.1"
+mapsKtxVersion = "5.0.0"
+mapsUtilsKtxVersion = "5.0.0"
 material = "1.12.0"
 constraintlayout = "2.1.4"
 lifecycleLivedataKtx = "2.8.4"
@@ -19,6 +25,7 @@ material3Version = "1.3.1"
 material3WindowSizeClassVersion = "1.3.1"
 navigationFragmentKtx = "2.7.7"
 navigationUiKtx = "2.7.7"
+playServicesMapsVersion = "19.1.0"
 roomRuntime = "2.6.1"
 preference = "1.2.1"
 legacySupportV4 = "1.0.0"
@@ -26,17 +33,21 @@ fragmentKtx = "1.8.2"
 runtimeAndroid = "1.7.5"
 runtimeDesktop = "1.7.0"
 runtimeJvmstubs = "1.7.5"
+secretsGradlePluginVersion = "2.0.1"
 uiTestJunit4Version = "1.7.5"
 uiTestManifestVersion = "1.7.5"
 uiToolingPreviewVersion = "1.7.5"
 uiToolingVersion = "1.7.5"
 uiVersion = "1.7.5"
 uiTextGoogleFontsVersion = "1.7.5"
+navigationComposeVersion = "2.8.6"
+material3AdaptiveNavigationSuiteAndroidVersion = "1.3.1"
 
 [libraries]
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityComposeVersion" }
 androidx-animation = { module = "androidx.compose.animation:animation", version.ref = "animationVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationComposeVersion" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
 androidx-material-icons-core = { module = "androidx.compose.material:material-icons-core" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
@@ -60,6 +71,11 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+maps-compose-utils = { module = "com.google.maps.android:maps-compose-utils", version.ref = "mapsComposeUtilsVersion" }
+maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "mapsComposeVersion" }
+maps-compose-widgets = { module = "com.google.maps.android:maps-compose-widgets", version.ref = "mapsComposeWidgetsVersion" }
+maps-utils-ktx = { module = "com.google.maps.android:maps-utils-ktx", version.ref = "mapsUtilsKtxVersion" }
+maps-ktx = { module = "com.google.maps.android:maps-ktx", version.ref = "mapsKtxVersion" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
@@ -73,6 +89,10 @@ androidx-runtime-android = { group = "androidx.compose.runtime", name = "runtime
 androidx-runtime-desktop = { group = "androidx.compose.runtime", name = "runtime-desktop", version.ref = "runtimeDesktop" }
 androidx-runtime-jvmstubs = { group = "androidx.compose.runtime", name = "runtime-jvmstubs", version.ref = "runtimeJvmstubs" }
 androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFontsVersion" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationComposeVersion" }
+androidx-material3-adaptive-navigation-suite-android = { group = "androidx.compose.material3", name = "material3-adaptive-navigation-suite-android", version.ref = "material3AdaptiveNavigationSuiteAndroidVersion" }
+play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMapsVersion" }
+secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePluginVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

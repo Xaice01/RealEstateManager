@@ -16,12 +16,12 @@ class PropertyTypeMapper @Inject constructor() {
         return propertyTypeList.map { mapToDomain(it) }
     }
 
-    fun mapToData(propertyTypeDomain: PropertyTypeDomain): PropertyType? {
+    fun mapToData(propertyTypeDomain: PropertyTypeDomain): PropertyType {
         return PropertyType.entries
-            .find { it.id == propertyTypeDomain.id }
+            .find { it.id == propertyTypeDomain.id }!!
     }
 
-    fun mapListToData(propertyTypeDomainList: List<PropertyTypeDomain>): List<PropertyType?> {
+    fun mapListToData(propertyTypeDomainList: List<PropertyTypeDomain>): List<PropertyType> {
         return propertyTypeDomainList.map { mapToData(it) }
     }
 

@@ -9,6 +9,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
+import com.xavier_carpentier.realestatemanager.BuildConfig
 
 @Composable
 fun StaticMapView(
@@ -31,7 +32,7 @@ fun StaticMapPreview() {
     val height: Int = 250
     val latitude: Double = 48.8566
     val longitude: Double = 2.3522
-    val apiKey: String ="Api_Key"
+    val apiKey: String =BuildConfig.MAPS_API_KEY
 
     val mapUrl = "https://maps.googleapis.com/maps/api/staticmap?" +
             "center=$latitude,$longitude" +

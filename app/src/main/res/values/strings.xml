@@ -9,6 +9,8 @@
     <string name="menu_property">Property</string>
     <string name="menu_map">Map</string>
     <string name="menu_setting">Setting</string>
+    <string name="detail">Detail</string>
+    <string name="create_and_modified_property">Create or Modify Property</string>
     <string name="create_home_fabButton">create home fab button</string>
     <string name="detail_screen_error"> Error while loading detail screen</string>
 

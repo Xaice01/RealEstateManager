@@ -6,37 +6,36 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.xavier_carpentier.realestatemanager.ui.compose.spinner.Spinner
 import com.xavier_carpentier.realestatemanager.ui.model.CurrencyUi
 import com.xavier_carpentier.realestatemanager.ui.setting.SettingViewModel
 
 @Composable
-fun SettingScreen(viewModel: SettingViewModel = viewModel()) {
+fun SettingScreen(viewModel: SettingViewModel = hiltViewModel()) {
     val currentAgent by viewModel.currentAgent.collectAsState(initial = null)
     val selectedCurrencyUi by viewModel.selectedCurrency.collectAsState(initial = null)
     val currentDollarRate by viewModel.currentDollarRate.collectAsState(initial = null)
-    val agents by viewModel.agents.collectAsState(initial = emptyList())
+    val agents by viewModel.agentsStateFlow.collectAsState()
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {
         // Premier TextView
@@ -47,13 +46,14 @@ fun SettingScreen(viewModel: SettingViewModel = viewModel()) {
             modifier = Modifier.padding(bottom = 8.dp)
         )
 
-        var selectedCurrency by remember { mutableStateOf(selectedCurrencyUi) }
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
             RadioButton(
-                selected = selectedCurrency?.displayName == "Euro",
-                onClick = { selectedCurrency = CurrencyUi(displayName = "Dollar", symbol = "$") },
+                selected = selectedCurrencyUi?.displayName == "Euro",
+                onClick = {
+                    viewModel.updateCurrency(CurrencyUi(displayName = "Euro", symbol = "€"))
+                    },
                 modifier = Modifier.padding(start = 4.dp)
             )
             Text("Euro", modifier = Modifier.padding(start = 4.dp))
@@ -61,7 +61,7 @@ fun SettingScreen(viewModel: SettingViewModel = viewModel()) {
             Spacer(modifier = Modifier.width(16.dp))
 
             RadioButton(
-                selected = selectedCurrency?.displayName == "Dollar",
+                selected = selectedCurrencyUi?.displayName == "Dollar",
                 onClick = { viewModel.updateCurrency(CurrencyUi(displayName = "Dollar", symbol = "$")) }
             )
             Text("Dollar", modifier = Modifier.padding(start = 4.dp))
@@ -75,9 +75,7 @@ fun SettingScreen(viewModel: SettingViewModel = viewModel()) {
         )
 
         // Spinner
-        var selectedAgent by remember { mutableStateOf(currentAgent) }
-
-        selectedAgent?.let { Spinner(nameList = "Agent", list = agents , preselected = it, onSelectionChanged = { agent -> selectedAgent=agent} ) }
+        currentAgent?.let { Spinner(nameList = "Agent", list = agents , preselected = it, onSelectionChanged = { agent -> viewModel.updateAgent(agent)} ) }
 
 
         Text(
@@ -87,25 +85,12 @@ fun SettingScreen(viewModel: SettingViewModel = viewModel()) {
             modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
         )
 
-        var dollarRate by remember { mutableStateOf(currentDollarRate?.toString() ?: "0.95") }
         OutlinedTextField(
-            value = dollarRate,
-            onValueChange = { dollarRate = it },
+            value = currentDollarRate.toString(),
+            onValueChange = { viewModel.updateDollarRate(it.toFloat()) },
             label = { Text("Taux de change") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
 
-        Button(
-            onClick = {
-                viewModel.updateDollarRate(dollarRate.toFloat())
-                selectedCurrency?.let { viewModel.updateCurrency(it) }
-                selectedAgent?.let { viewModel.updateAgent(it) }
-                      },
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(top = 16.dp)
-        ) {
-            Text("Valider")
-        }
     }
 }

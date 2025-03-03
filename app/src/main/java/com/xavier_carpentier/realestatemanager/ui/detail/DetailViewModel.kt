@@ -2,6 +2,7 @@ package com.xavier_carpentier.realestatemanager.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.xavier_carpentier.realestatemanager.BuildConfig
 import com.xavier_carpentier.realestatemanager.domain.current_property.GetCurrentPropertyIdUseCase
 import com.xavier_carpentier.realestatemanager.domain.property.GetPropertyWithPictureUseCase
 import com.xavier_carpentier.realestatemanager.domain.property.GetPropertyWithPictureUseCaseResult
@@ -45,8 +46,7 @@ class DetailViewModel @Inject constructor(
         val zoom = 14
         val width = 400
         val height = 400
-        //TODO put the api key
-        val apiKey = "Your_Google_Maps_API_Key"
+        val apiKey = BuildConfig.MAPS_API_KEY
 
         return "https://maps.googleapis.com/maps/api/staticmap?" +
                 "center=$latitude,$longitude" +

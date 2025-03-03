@@ -1,5 +1,6 @@
 package com.xavier_carpentier.realestatemanager.datasource.picture
 
+import android.database.Cursor
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -31,4 +32,7 @@ interface PictureDao {
 
     @Query("SELECT * from picture ORDER BY id ASC")
     fun getAllPicture() : Flow<List<Picture>>
+
+    @Query("SELECT * FROM picture")
+    fun getAllPictureCursor(): Cursor
 }
