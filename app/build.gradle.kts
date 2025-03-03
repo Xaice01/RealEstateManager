@@ -3,9 +3,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("com.google.dagger.hilt.android")
     kotlin("kapt")
-
 }
 
 android {
@@ -19,17 +19,21 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        val mapsApiKey: String = providers.gradleProperty("MAPS_API_KEY").getOrElse("DEFAULT_API_KEY")
+        buildConfigField("String", "MAPS_API_KEY", "\"$mapsApiKey\"")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildFeatures {
+        buildConfig = true
         compose=true
         viewBinding = true
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -62,6 +66,23 @@ dependencies {
     implementation(libs.androidx.preference)
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.fragment.ktx)
+
+    //secret properties
+    implementation(libs.secrets.gradle.plugin)
+
+    //Google map
+    implementation(libs.play.services.maps)
+    // KTX for the Maps SDK for Android library
+    implementation(libs.maps.ktx)
+    // KTX for the Maps SDK for Android Utility Library
+    implementation(libs.maps.utils.ktx)
+
+    //Google Map Compose
+    implementation(libs.maps.compose)
+    // Google Maps Compose utility library
+    implementation(libs.maps.compose.utils)
+    // Google Maps Compose widgets library
+    implementation(libs.maps.compose.widgets)
 
     //Compose
     implementation(libs.activity.compose)
@@ -119,6 +140,12 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.google.hilt.android.testing)
     kaptTest (libs.hilt.compliler)
+}
+
+secrets {
+
+    propertiesFileName = "secrets.properties"
+    defaultPropertiesFileName = "local.defaults.properties"
 }
 
 // Allow references to generated code
