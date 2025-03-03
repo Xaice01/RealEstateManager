@@ -15,6 +15,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
@@ -59,6 +60,7 @@ fun NavigationScreen(viewModel: MainViewModel = hiltViewModel(), windowSizeClass
     Scaffold(
         topBar = {
             TopAppBar(
+                colors= TopAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer,scrolledContainerColor = MaterialTheme.colorScheme.primaryContainer, navigationIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,actionIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer),
                 title = { Text("Real Estate Manager") },
                 actions = {
                     IconButton(onClick = { navController.navigate("CreateAndModified/true") }) {
