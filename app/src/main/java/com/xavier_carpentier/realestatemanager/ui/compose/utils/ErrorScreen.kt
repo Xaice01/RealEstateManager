@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.xavier_carpentier.realestatemanager.ui.theme.AppTheme
 
 @Composable
 fun ErrorScreen(message: String) {
@@ -26,5 +27,7 @@ fun ErrorScreen(message: String) {
 @Preview
 @Composable
 fun ErrorScreenPreview() {
-    ErrorScreen(message = "An error occurred")
+    AppTheme {
+        ErrorScreen(message = "An error occurred")
+    }
 }

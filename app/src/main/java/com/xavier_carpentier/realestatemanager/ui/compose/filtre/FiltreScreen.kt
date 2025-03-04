@@ -13,12 +13,12 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -28,16 +28,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.xavier_carpentier.realestatemanager.R
 import com.xavier_carpentier.realestatemanager.ui.compose.utils.LoadingScreen
+import com.xavier_carpentier.realestatemanager.ui.compose.utils.TwoOutlinedTextFieldInRow
 import com.xavier_carpentier.realestatemanager.ui.filter.FilterUiState
 import com.xavier_carpentier.realestatemanager.ui.filter.FilterViewModel
 import com.xavier_carpentier.realestatemanager.ui.model.FilterType
 import com.xavier_carpentier.realestatemanager.ui.model.FilterUi
 import com.xavier_carpentier.realestatemanager.ui.model.PropertyTypeUiCheckable
+import com.xavier_carpentier.realestatemanager.ui.theme.AppTheme
 
 @Composable
 fun FilterScreen(viewModel :FilterViewModel  = hiltViewModel(),onFilterApplied: ()-> Unit)
@@ -81,8 +84,6 @@ fun FilterContent(
     Surface(
         modifier = modifier
     ){
-        //var propertyTypeCheckable by remember {
-        // mutableStateOf(listOfPropertyType.map { it -> PropertyTypeUiCheckable(it, false) })}
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -127,7 +128,8 @@ fun FilterContent(
                     onFirstValueChange = { onChangeValue(FilterType.MIN_PRICE, it) },
                     onSecondValueChange = { onChangeValue(FilterType.MAX_PRICE, it) },
                     firstLabel = "Min Price",
-                    secondLabel = "Max Price"
+                    secondLabel = "Max Price",
+                    keyboardOptions = KeyboardOptions( keyboardType = KeyboardType.Number)
                 )
 
                 TwoOutlinedTextFieldInRow(
@@ -136,7 +138,8 @@ fun FilterContent(
                     onFirstValueChange = { onChangeValue(FilterType.MIN_SURFACE, it) },
                     onSecondValueChange = { onChangeValue(FilterType.MAX_SURFACE, it) },
                     firstLabel = "Min Surface",
-                    secondLabel = "Max Surface"
+                    secondLabel = "Max Surface",
+                    keyboardOptions = KeyboardOptions( keyboardType = KeyboardType.Number)
                 )
 
                 Text(
@@ -224,36 +227,6 @@ fun FilterAttributeCheckboxItem(
     }
 }
 
-@Composable
-fun TwoOutlinedTextFieldInRow(
-    firstValue: String,
-    secondValue: String,
-    onFirstValueChange: (String) -> Unit,
-    onSecondValueChange: (String) -> Unit,
-    firstLabel: String,
-    secondLabel: String,
-    modifier: Modifier=Modifier
-){
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .padding(vertical = 4.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        OutlinedTextField(
-            value = firstValue,
-            onValueChange = { onFirstValueChange(it) },
-            label = { Text(firstLabel) },
-            modifier = modifier.weight(1f)
-        )
-        OutlinedTextField(
-            value = secondValue,
-            onValueChange = { onSecondValueChange(it) },
-            label = { Text(secondLabel) },
-            modifier = Modifier.weight(1f)
-        )
-    }
-}
-
 
 @Preview
 @Composable
@@ -278,6 +251,15 @@ fun FilterContentPreview() {
         Triple<FilterType, Boolean?, Int>(FilterType.NEARBY_PUBLIC_TRANSPORTATION, filter.nearbyPublicTransportation, R.string.transport),
         Triple<FilterType, Boolean?, Int>(FilterType.NEARBY_PHARMACY, filter.nearbyPharmacy, R.string.pharmacy)
     )
-
-    FilterContent(filter, PropertyTypeUiCheckable, checkedStates, { _, _ -> }, { _, _ -> }, { _ -> }, Modifier)
+    AppTheme {
+        FilterContent(
+            filter,
+            PropertyTypeUiCheckable,
+            checkedStates,
+            { _, _ -> },
+            { _, _ -> },
+            { _ -> },
+            Modifier
+        )
+    }
 }

@@ -13,7 +13,6 @@ import androidx.compose.material.icons.outlined.ArrowDropDown
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.xavier_carpentier.realestatemanager.R
+import com.xavier_carpentier.realestatemanager.ui.theme.AppTheme
 
 @Composable
 fun Spinner(
@@ -150,7 +150,8 @@ fun Spinner(
 @Preview(showBackground = true)
 @Composable
 fun Spinner_Pair_Preview() {
-    MaterialTheme {
+
+    AppTheme {
 
         val entry1 = Pair(1, "Entry1")
         val entry2 = Pair(2, "Entry2")
@@ -168,7 +169,7 @@ fun Spinner_Pair_Preview() {
 @Preview(showBackground = true)
 @Composable
 fun Spinner_Triple_Preview() {
-    MaterialTheme {
+    AppTheme {
 
         val entry1 = Triple(1, "house", R.string.house)
         val entry2 = Triple(2, "lama", R.string.flat)

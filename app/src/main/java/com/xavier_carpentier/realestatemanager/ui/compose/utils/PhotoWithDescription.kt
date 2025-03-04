@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import com.xavier_carpentier.realestatemanager.R
 import com.xavier_carpentier.realestatemanager.ui.compose.listProperty.loadImageAsByteArray
 import com.xavier_carpentier.realestatemanager.ui.model.PictureUi
+import com.xavier_carpentier.realestatemanager.ui.theme.AppTheme
 
 @Composable
 fun PhotoWithDescription(picture: PictureUi) {
@@ -64,7 +65,9 @@ fun PhotoWithDescription(picture: PictureUi) {
 fun PhotoWithDescriptionPreview() {
     val context = LocalContext.current
     val fakeImage = loadImageAsByteArray(context, R.drawable.image_property_picture)
-    PhotoWithDescription(
-        PictureUi(id = 1, propertyId = 1, description = "Lounge", image = fakeImage)
-    )
+    AppTheme {
+        PhotoWithDescription(
+            PictureUi(id = 1, propertyId = 1, description = "Lounge", image = fakeImage)
+        )
+    }
 }

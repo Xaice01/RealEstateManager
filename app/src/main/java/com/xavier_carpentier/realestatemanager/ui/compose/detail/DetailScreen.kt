@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -41,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.xavier_carpentier.realestatemanager.R
 import com.xavier_carpentier.realestatemanager.ui.compose.listProperty.loadImageAsByteArray
+import com.xavier_carpentier.realestatemanager.ui.compose.utils.DetailSection
 import com.xavier_carpentier.realestatemanager.ui.compose.utils.ErrorScreen
 import com.xavier_carpentier.realestatemanager.ui.compose.utils.IconAndTextWithTitle
 import com.xavier_carpentier.realestatemanager.ui.compose.utils.LoadingScreen
@@ -52,6 +52,7 @@ import com.xavier_carpentier.realestatemanager.ui.detail.PropertyWithPictureUISt
 import com.xavier_carpentier.realestatemanager.ui.model.PictureUi
 import com.xavier_carpentier.realestatemanager.ui.model.PropertyUi
 import com.xavier_carpentier.realestatemanager.ui.model.PropertyWithPictureUi
+import com.xavier_carpentier.realestatemanager.ui.theme.AppTheme
 import java.util.Calendar
 
 
@@ -183,25 +184,6 @@ fun DetailContentListImage(
         items(listImage){picture->
             PhotoWithDescription(picture = picture)
         }
-    }
-}
-
-@Composable
-fun DetailSection(
-    title: String,
-    content: @Composable () -> Unit,
-    modifier: Modifier = Modifier
-){
-    Column(modifier = modifier) {
-        Text(
-            text = title,
-            modifier
-                .paddingFromBaseline(top = 40.dp, bottom = 8.dp)
-                .padding(start = 16.dp),
-            style = MaterialTheme.typography.titleMedium,
-            )
-        Spacer(modifier = Modifier.height(8.dp))
-        content()
     }
 }
 
@@ -381,8 +363,9 @@ fun CompactDetailPreview() {
     )
 
     val propertyWithPictureUi = PropertyWithPictureUi(propertyUi, fakeList)
-
-    CompactDetailContent(propertyWithPictureUi, "")
+    AppTheme {
+        CompactDetailContent(propertyWithPictureUi, "")
+    }
 }
 
 @Preview(widthDp = 800, heightDp = 600)
@@ -421,11 +404,15 @@ fun ExpandedDetailPreview() {
         interestNearbyPharmacy = true
     )
     val propertyWithPictureUi = PropertyWithPictureUi(propertyUi, fakeList)
-    ExpandedDetailContent(propertyWithPictureUi, mapUrl = "")
+    AppTheme {
+        ExpandedDetailContent(propertyWithPictureUi, mapUrl = "")
+    }
 }
 
 @Preview
 @Composable
 fun DetailMapAndButtonSectionPreview() {
-    DetailMapSection(mapUrl = "")
+    AppTheme {
+        DetailMapSection(mapUrl = "")
+    }
 }

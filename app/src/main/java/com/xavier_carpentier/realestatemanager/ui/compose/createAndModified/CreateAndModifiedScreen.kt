@@ -50,6 +50,7 @@ import com.xavier_carpentier.realestatemanager.ui.compose.utils.PhotoWithDescrip
 import com.xavier_carpentier.realestatemanager.ui.create.CreatePropertyViewModel
 import com.xavier_carpentier.realestatemanager.ui.model.PictureUi
 import com.xavier_carpentier.realestatemanager.ui.model.PropertyUi
+import com.xavier_carpentier.realestatemanager.ui.theme.AppTheme
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
@@ -377,52 +378,56 @@ fun CreateAndModifiedScreenPreview() {
         Triple(2, "lama", R.string.flat),
         Triple(3, "villa", R.string.villa)
     )
-
-    CreateAndModifiedContent(
-        create = false,
-        property = PropertyUi(
-            id = 1,
-            type = "House",
-            price = 250000,
-            address = "123 Rue Imaginaire",
-            latitude = 0.0,
-            longitude = 0.0,
-            surface = 120,
-            room = 5,
-            bedroom = 3,
-            description = "Une belle maison.",
-            entryDate = Calendar.getInstance(),
-            soldDate = null,
-            sold = false,
-            agent = "Jean Dupont",
-            interestNearbySchool = true,
-            interestNearbyShop = false,
-            interestNearbyPark = true,
-            interestNearbyRestaurant = false,
-            interestNearbyPublicTransportation = true,
-            interestNearbyPharmacy = true
-        ),
-        pictures = listOf(
-            PictureUi(
+    AppTheme {
+        CreateAndModifiedContent(
+            create = false,
+            property = PropertyUi(
                 id = 1,
-                propertyId = 1,
-                description = "Salon",
-                image = fakeImage),
-            PictureUi(
-                id = 2,
-                propertyId = 1,
-                description = "Chambre",
-                image = fakeImage),
-            PictureUi(
-                id = 3,
-                propertyId = 1,
-                description = "Salle de bain",
-                image = fakeImage)
-        ),
-        agentList = agentList,
-        typeList = typeList,
-        onPropertyChange = {},
-        onAddPicture = {},
-        onDeletePicture = {}
-    )
+                type = "House",
+                price = 250000,
+                address = "123 Rue Imaginaire",
+                latitude = 0.0,
+                longitude = 0.0,
+                surface = 120,
+                room = 5,
+                bedroom = 3,
+                description = "Une belle maison.",
+                entryDate = Calendar.getInstance(),
+                soldDate = null,
+                sold = false,
+                agent = "Jean Dupont",
+                interestNearbySchool = true,
+                interestNearbyShop = false,
+                interestNearbyPark = true,
+                interestNearbyRestaurant = false,
+                interestNearbyPublicTransportation = true,
+                interestNearbyPharmacy = true
+            ),
+            pictures = listOf(
+                PictureUi(
+                    id = 1,
+                    propertyId = 1,
+                    description = "Salon",
+                    image = fakeImage
+                ),
+                PictureUi(
+                    id = 2,
+                    propertyId = 1,
+                    description = "Chambre",
+                    image = fakeImage
+                ),
+                PictureUi(
+                    id = 3,
+                    propertyId = 1,
+                    description = "Salle de bain",
+                    image = fakeImage
+                )
+            ),
+            agentList = agentList,
+            typeList = typeList,
+            onPropertyChange = {},
+            onAddPicture = {},
+            onDeletePicture = {}
+        )
+    }
 }

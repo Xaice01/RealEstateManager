@@ -1,6 +1,5 @@
 package com.xavier_carpentier.realestatemanager.ui.compose.utils
 
-import android.graphics.drawable.Icon
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,20 +15,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.xavier_carpentier.realestatemanager.R
+import com.xavier_carpentier.realestatemanager.ui.theme.AppTheme
 
 @Composable
 fun IconAndText(icon: Int,description: String , text: String){
     Row(verticalAlignment = Alignment.CenterVertically) {
         Icon(painterResource(icon), contentDescription = description)
-        Spacer(modifier= Modifier.width(4.dp))
-        Text(text = text)
-    }
-}
-
-@Composable
-fun CheckText(icon: Icon, description: String, text: String){
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        icon
         Spacer(modifier= Modifier.width(4.dp))
         Text(text = text)
     }
@@ -50,11 +41,20 @@ fun IconAndTextWithTitle(icon: Int,description: String , text: String, title: St
 @Preview
 @Composable
 fun IconAndTextPreview() {
-    IconAndText(R.drawable.baseline_location_pin_24,"Location","123 Main Street NewYork" )
+    AppTheme {
+        IconAndText(R.drawable.baseline_location_pin_24, "Location", "123 Main Street NewYork")
+    }
 }
 
 @Preview
 @Composable
 fun IconAndTextWithTitlePreview() {
-    IconAndTextWithTitle(R.drawable.baseline_location_pin_24,"Location","123 Main Street NewYork", "Address")
+    AppTheme {
+        IconAndTextWithTitle(
+            R.drawable.baseline_location_pin_24,
+            "Location",
+            "123 Main Street NewYork",
+            "Address"
+        )
+    }
 }

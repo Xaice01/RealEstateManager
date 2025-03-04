@@ -24,6 +24,7 @@ import com.xavier_carpentier.realestatemanager.ui.model.CurrencyUi
 import com.xavier_carpentier.realestatemanager.ui.model.PictureUi
 import com.xavier_carpentier.realestatemanager.ui.model.PropertyUi
 import com.xavier_carpentier.realestatemanager.ui.model.PropertyWithPictureUi
+import com.xavier_carpentier.realestatemanager.ui.theme.AppTheme
 import java.util.Calendar
 
 @Composable
@@ -136,14 +137,19 @@ fun ListPropertyContentPreview() {
     )
     val item2 = PropertyWithPictureUi(propertyUi = propertyUi2, picturesUi = picturesUi2)
 
-
-    ListPropertyContent(listOf(item1,item2,item2,item2,item2,item2),currentUi, onClick = {})
-
+    AppTheme {
+        ListPropertyContent(
+            listOf(item1, item2, item2, item2, item2, item2),
+            currentUi,
+            onClick = {})
+    }
 }
 
 
 @Preview
 @Composable
 fun EmptyScreenPreview() {
-    EmptyScreen()
+    AppTheme {
+        EmptyScreen()
+    }
 }

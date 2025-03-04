@@ -91,7 +91,6 @@ fun MapContent(
     }
 
 
-
     if (!isMapLoaded) {
         AnimatedVisibility(
             visible = !isMapLoaded,
