@@ -71,15 +71,7 @@ class FilterViewModel @Inject constructor(
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), FilterUiState.Loading)
 
-   // private val _checkedStates = listOf(
-   //     Triple<FilterType, Boolean?, Int>(FilterType.SOLD, filter.value.sold, R.string.sold),
-   //     Triple<FilterType, Boolean?, Int>(FilterType.NEARBY_SCHOOL, filter.value.nearbySchool, R.string.school),
-   //     Triple<FilterType, Boolean?, Int>(FilterType.NEARBY_SHOP, filter.value.nearbyShop, R.string.shop),
-   //     Triple<FilterType, Boolean?, Int>(FilterType.NEARBY_PARK, filter.value.nearbyPark, R.string.park),
-   //     Triple<FilterType, Boolean?, Int>(FilterType.NEARBY_RESTAURANT, filter.value.nearbyRestaurant, R.string.restaurant),
-   //     Triple<FilterType, Boolean?, Int>(FilterType.NEARBY_PUBLIC_TRANSPORTATION, filter.value.nearbyPublicTransportation, R.string.transport),
-   //     Triple<FilterType, Boolean?, Int>(FilterType.NEARBY_PHARMACY, filter.value.nearbyPharmacy, R.string.pharmacy)
-   // ).toMutableStateList()
+
     val checkedStates: List<Triple<FilterType, Boolean?, Int>>
         get() = listOf(
             Triple(FilterType.SOLD, _filter.value.sold, R.string.sold),
