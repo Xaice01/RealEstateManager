@@ -161,7 +161,7 @@ fun Spinner_Pair_Preview() {
             "list Key Entry",
             listOf(entry1, entry2, entry3),
             preselected = entry2,
-            onSelectionChanged = { selected -> /* do something with selected */ }
+            onSelectionChanged = {  }
         )
     }
 }
@@ -179,7 +179,7 @@ fun Spinner_Triple_Preview() {
             "list Key Entry",
             listOf(entry1, entry2, entry3),
             preselected = entry2,
-            onSelectionChanged = { selected -> /* do something with selected */ }
+            onSelectionChanged = { }
         )
     }
 }

@@ -1,5 +1,7 @@
 package com.xavier_carpentier.realestatemanager.ui.compose.createAndModified
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -20,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.xavier_carpentier.realestatemanager.ui.model.PictureUi
+import java.io.ByteArrayOutputStream
 import java.io.InputStream
 
 @Composable
@@ -58,13 +61,14 @@ fun AddPhotoGaleryWithDescriptionButton(
                 Button(onClick = {
                     imageUri?.let { uri ->
                         val inputStream: InputStream? = context.contentResolver.openInputStream(uri)
-                        val imageBytes = inputStream?.readBytes() ?: ByteArray(0)
+                        val bitmap = BitmapFactory.decodeStream(inputStream)
 
+                        val compressedBytes = compressBitmap(bitmap)
                         val newPicture = PictureUi(
                             id = 0,
                             propertyId = propertyId,
                             description = description.text,
-                            image = imageBytes
+                            image = compressedBytes
                         )
                         //onAddPicture(newPicture)
                         imageUri = null
@@ -72,7 +76,7 @@ fun AddPhotoGaleryWithDescriptionButton(
                         isExpanded = false
 
 
-                        onAddPicture(newPicture) // On appelle l'ajout après la mise à jour de l'état
+                        onAddPicture(newPicture)
 
                     }
                 }) {
@@ -81,4 +85,10 @@ fun AddPhotoGaleryWithDescriptionButton(
             }
         }
     }
+}
+
+private fun compressBitmap(bitmap: Bitmap, quality: Int = 50): ByteArray {
+    val stream = ByteArrayOutputStream()
+    bitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream)
+    return stream.toByteArray()
 }

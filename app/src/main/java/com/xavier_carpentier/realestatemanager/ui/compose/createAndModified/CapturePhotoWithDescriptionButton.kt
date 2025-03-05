@@ -27,6 +27,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.xavier_carpentier.realestatemanager.ui.model.PictureUi
+import java.io.ByteArrayOutputStream
 import java.io.InputStream
 
 @Composable
@@ -83,15 +84,13 @@ fun CapturePhotoWithDescriptionButton(
             )
 
             Button(onClick = {
-                val imageBytes = photoUri?.let { uri ->
-                    context.contentResolver.openInputStream(uri)?.readBytes()
-                } ?: ByteArray(0)
+                val compressedBytes = compressBitmap(bitmap)
 
                 val newPicture = PictureUi(
                     id = 0,
                     propertyId = propertyId,
                     description = description.text,
-                    image = imageBytes
+                    image = compressedBytes
                 )
                 onAddPicture(newPicture)
                 capturedBitmap = null
@@ -112,4 +111,10 @@ fun createImageUri(context: Context): Uri? {
     }
 
     return context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+}
+
+private fun compressBitmap(bitmap: Bitmap, quality: Int = 50): ByteArray {
+    val stream = ByteArrayOutputStream()
+    bitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream)
+    return stream.toByteArray()
 }

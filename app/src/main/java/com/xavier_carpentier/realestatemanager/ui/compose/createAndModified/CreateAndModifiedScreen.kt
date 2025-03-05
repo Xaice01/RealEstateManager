@@ -71,7 +71,7 @@ fun CreateAndModifiedScreen(
     val createMode by viewModel.createMode.collectAsState()
 
     LaunchedEffect(property) {
-        println("DEBUG: Propriété chargée - ${property}")
+        println("DEBUG: Propriété chargée - $property")
     }
 
     CreateAndModifiedContent(
