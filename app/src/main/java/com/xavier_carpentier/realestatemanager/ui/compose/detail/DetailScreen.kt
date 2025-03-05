@@ -74,8 +74,8 @@ fun DetailScreen(
             val mapUrl = viewModel.getMapUrl()
 
             when (screenType) {
-                ScreenType.Compact -> CompactDetailContent(property, mapUrl)
-                ScreenType.Medium, ScreenType.Expanded -> ExpandedDetailContent(property, mapUrl)
+                ScreenType.Compact, ScreenType.Medium -> CompactDetailContent(property, mapUrl)
+                ScreenType.Expanded ->ExpandedDetailContent(property, mapUrl)
             }
         }
         is PropertyWithPictureUIState.Empty -> ErrorScreen(message = stringResource(id = R.string.detail_screen_error))
@@ -368,7 +368,7 @@ fun CompactDetailPreview() {
     }
 }
 
-@Preview(widthDp = 800, heightDp = 600)
+@Preview(widthDp = 840, heightDp = 600)
 @Composable
 fun ExpandedDetailPreview() {
     val context = LocalContext.current

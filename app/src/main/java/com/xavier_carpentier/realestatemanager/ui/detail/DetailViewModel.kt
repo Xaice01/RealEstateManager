@@ -9,13 +9,16 @@ import com.xavier_carpentier.realestatemanager.domain.property.GetPropertyWithPi
 import com.xavier_carpentier.realestatemanager.ui.mapper.PropertyWithPictureUiMapper
 import com.xavier_carpentier.realestatemanager.ui.model.PropertyWithPictureUi
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val getPropertyWithPictureUseCase: GetPropertyWithPictureUseCase,
@@ -25,20 +28,28 @@ class DetailViewModel @Inject constructor(
     private val _propertyUiState = MutableStateFlow<PropertyWithPictureUi?>(null)
 
 
-    private val currentPropertyId = getCurrentPropertyIdUseCase.invoke()
+    private val currentPropertyId = getCurrentPropertyIdUseCase()
 
-    val uiState: StateFlow<PropertyWithPictureUIState> = getPropertyWithPictureUseCase(currentPropertyId.value!!)
-        .map { result ->
-            when (result) {
-                is GetPropertyWithPictureUseCaseResult.Empty -> PropertyWithPictureUIState.Empty
-                is GetPropertyWithPictureUseCaseResult.Success -> {
-                    val propertyUi= PropertyWithPictureUiMapper.mapToUi(result.property)
-                    _propertyUiState.value = propertyUi
-                    PropertyWithPictureUIState.Success (propertyUi)
+    val uiState: StateFlow<PropertyWithPictureUIState> = currentPropertyId
+        .flatMapLatest { propertyId ->
+            if (propertyId == null) {
+
+                kotlinx.coroutines.flow.flowOf(PropertyWithPictureUIState.Empty)
+            } else {
+
+                getPropertyWithPictureUseCase(propertyId).map { result ->
+                    when (result) {
+                        is GetPropertyWithPictureUseCaseResult.Empty -> PropertyWithPictureUIState.Empty
+                        is GetPropertyWithPictureUseCaseResult.Success -> {
+                            val propertyUi = PropertyWithPictureUiMapper.mapToUi(result.property)
+                            _propertyUiState.value = propertyUi
+                            PropertyWithPictureUIState.Success(propertyUi)
+                        }
+                    }
                 }
             }
         }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000),PropertyWithPictureUIState.Loading)
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), PropertyWithPictureUIState.Loading)
 
     fun getMapUrl(): String{
         val latitude = _propertyUiState.value?.propertyUi?.latitude

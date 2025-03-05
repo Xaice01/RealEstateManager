@@ -40,6 +40,7 @@ import com.xavier_carpentier.realestatemanager.ui.compose.createAndModified.Crea
 import com.xavier_carpentier.realestatemanager.ui.compose.detail.DetailScreen
 import com.xavier_carpentier.realestatemanager.ui.compose.filtre.FilterScreen
 import com.xavier_carpentier.realestatemanager.ui.compose.listProperty.ListPropertyScreen
+import com.xavier_carpentier.realestatemanager.ui.compose.listPropertyAndDetail.ListPropertyAndDetailScreen
 import com.xavier_carpentier.realestatemanager.ui.compose.loanSimulator.LoanSimulatorScreen
 import com.xavier_carpentier.realestatemanager.ui.compose.map.MapScreen
 import com.xavier_carpentier.realestatemanager.ui.compose.setting.SettingScreen
@@ -127,9 +128,7 @@ fun NavigationScreen(viewModel: MainViewModel = hiltViewModel(), windowSizeClass
                         onDetailPressButton = { navController.navigate(Screen.DetailProperty.route) }
                     )
                 }else {
-                    //ListPropertyScreenAndDetail(
-                    //    onModifyPressButton = { navController.navigate("CreateAndModified/false") }
-                    //)
+                    ListPropertyAndDetailScreen()
                 }
             }
             composable(Screen.Map.route) {
@@ -157,9 +156,7 @@ fun NavigationScreen(viewModel: MainViewModel = hiltViewModel(), windowSizeClass
                 if (windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact){
                     DetailScreen()
                 }else {
-                    //ListPropertyScreenAndDetail(
-                    //    onModifyPressButton = { navController.navigate("CreateAndModified/false") }
-                    //)
+                    ListPropertyAndDetailScreen()
                 }
             }
         }
