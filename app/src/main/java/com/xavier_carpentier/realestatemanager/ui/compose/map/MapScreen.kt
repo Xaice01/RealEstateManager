@@ -1,10 +1,12 @@
 package com.xavier_carpentier.realestatemanager.ui.compose.map
 
+import android.Manifest
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -12,6 +14,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -26,9 +30,25 @@ import com.xavier_carpentier.realestatemanager.ui.map.MapViewModel
 import com.xavier_carpentier.realestatemanager.ui.model.CurrencyUi
 import com.xavier_carpentier.realestatemanager.ui.model.PropertyWithPictureUi
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun MapScreen(viewModel: MapViewModel = hiltViewModel(), onDetailPressButton: () -> Unit){
 
+    val multiplePermissionsState = rememberMultiplePermissionsState(
+        permissions = listOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+    )
+
+    LaunchedEffect(multiplePermissionsState.allPermissionsGranted) {
+        viewModel.setPermissionLocation(multiplePermissionsState.allPermissionsGranted)
+        if (!multiplePermissionsState.allPermissionsGranted) {
+            multiplePermissionsState.launchMultiplePermissionRequest()
+        }
+    }
+
+    val location by viewModel.location.collectAsState()
     val uiState by viewModel.uiState.collectAsState()
 
     when (uiState) {
@@ -42,7 +62,8 @@ fun MapScreen(viewModel: MapViewModel = hiltViewModel(), onDetailPressButton: ()
                 onClick = {property ->
                 viewModel.onSelectProperty(property.propertyUi.id)
                 onDetailPressButton()
-                }
+                },
+                location = location
             )
 
         }
@@ -54,11 +75,12 @@ fun MapScreen(viewModel: MapViewModel = hiltViewModel(), onDetailPressButton: ()
 fun MapContent(
     properties: List<PropertyWithPictureUi>,
     currencyUi : CurrencyUi,
-    onClick: (item :PropertyWithPictureUi) -> Unit
+    onClick: (item :PropertyWithPictureUi) -> Unit,
+    location : LatLng
 ){
 
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(LatLng(48.8584, 2.2945), 5f)
+        position = CameraPosition.fromLatLngZoom(location, 5f)
     }
 
     var isMapLoaded by remember { mutableStateOf(false) }

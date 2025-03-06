@@ -67,6 +67,10 @@ dependencies {
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.fragment.ktx)
 
+    //Location
+    implementation (libs.play.services.location)
+    implementation (libs.accompanist.permissions)
+
     //secret properties
     implementation(libs.secrets.gradle.plugin)
 
