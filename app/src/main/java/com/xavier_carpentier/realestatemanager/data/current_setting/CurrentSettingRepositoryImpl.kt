@@ -7,6 +7,7 @@ import com.xavier_carpentier.realestatemanager.data.currency.CurrencyEntity
 import com.xavier_carpentier.realestatemanager.domain.agent.model.AgentDomain
 import com.xavier_carpentier.realestatemanager.domain.current_setting.CurrentSettingRepository
 import com.xavier_carpentier.realestatemanager.domain.current_setting.model.CurrencyType
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,14 +21,15 @@ import javax.inject.Singleton
 
 @Singleton
 class CurrentSettingRepositoryImpl @Inject constructor(
-    private val agentMapper: AgentMapper
-    ,private val currencyMapper: CurrencyDataMapper
+    private val agentMapper: AgentMapper,
+    private val currencyMapper: CurrencyDataMapper,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) :CurrentSettingRepository {
     private val currentAgentMutableStateFlow = MutableStateFlow<Agent?>(Agent.JOHN_SMITH)
     override val currentAgentFlow: StateFlow<AgentDomain?> = currentAgentMutableStateFlow
         .map { agent -> agent?.let { agentMapper.mapToDomain(it) } }
         .stateIn(
-            scope = CoroutineScope(Dispatchers.IO),
+            scope = CoroutineScope(dispatcher),
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = agentMapper.mapToDomain(Agent.JOHN_SMITH)
         )
@@ -40,7 +42,7 @@ class CurrentSettingRepositoryImpl @Inject constructor(
     override val selectedCurrencyFlow: StateFlow<CurrencyType?> = selectedCurrencyMutableStateFlow
         .map { currencyEntity -> currencyEntity?.let { currencyMapper.mapToDomain(it) } }
         .stateIn(
-            scope = CoroutineScope(Dispatchers.IO),
+            scope = CoroutineScope(dispatcher),
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = currencyMapper.mapToDomain(CurrencyEntity("USD"))
         )

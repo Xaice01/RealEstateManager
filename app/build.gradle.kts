@@ -122,9 +122,6 @@ dependencies {
 
     //Room
     implementation(libs.androidx.room.runtime)
-    //implementation(libs.androidx.runtime.android)
-    //implementation(libs.androidx.runtime.desktop)
-    //implementation(libs.androidx.runtime.jvmstubs)
     //noinspection KaptUsageInsteadOfKsp
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
@@ -143,6 +140,8 @@ dependencies {
     //test Unit
     testImplementation(libs.junit)
     testImplementation(libs.google.hilt.android.testing)
+    testImplementation (libs.jetbrains.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
     kaptTest (libs.hilt.compliler)
 }
 

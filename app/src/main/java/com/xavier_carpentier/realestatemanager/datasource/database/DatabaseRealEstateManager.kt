@@ -16,21 +16,4 @@ abstract class DatabaseRealEstateManager() :RoomDatabase() {
     abstract fun propertyDao() :PropertyDao
     abstract fun pictureDao() : PictureDao
 
-    //companion object{
-//
-    //    private fun buildDatabase(context: Context) :DatabaseRealEstateManager{
-    //        return Room.databaseBuilder(context,DatabaseRealEstateManager::class.java,"RealEstateManager_database")
-    //            .fallbackToDestructiveMigration()
-    //            .build()
-    //    }
-    //    //singleton
-    //    @Volatile
-    //    private var instance :DatabaseRealEstateManager?=null
-//
-    //    fun getDatabase(context : Context) :DatabaseRealEstateManager{
-    //        return instance ?: synchronized(this){
-    //            buildDatabase(context).also { instance = it }
-    //        }
-    //    }
-    //}
 }
