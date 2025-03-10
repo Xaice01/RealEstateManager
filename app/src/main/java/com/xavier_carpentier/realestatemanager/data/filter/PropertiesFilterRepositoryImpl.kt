@@ -4,6 +4,7 @@ import com.xavier_carpentier.realestatemanager.data.filter.model.Filter
 import com.xavier_carpentier.realestatemanager.data.filter.model.FilterMapper
 import com.xavier_carpentier.realestatemanager.domain.filter.FilterRepository
 import com.xavier_carpentier.realestatemanager.domain.filter.model.FilterDomain
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -14,8 +15,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class PropertiesFilterRepositoryImpl @Inject constructor() : FilterRepository{
+@Singleton
+class PropertiesFilterRepositoryImpl @Inject constructor(
+    private val dispatcher: CoroutineDispatcher
+) : FilterRepository{
 
     private val _filterMutableStateFlow = MutableStateFlow<Filter?>(null)
     private val filterStateFlow :StateFlow<Filter?> = _filterMutableStateFlow
@@ -30,7 +35,7 @@ class PropertiesFilterRepositoryImpl @Inject constructor() : FilterRepository{
         return filterStateFlow
             .map { filter -> filter?.let { FilterMapper().mapToDomain(it) } }
             .stateIn(
-                scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
+                scope = CoroutineScope(dispatcher + SupervisorJob()),
                 started = SharingStarted.Eagerly,
                 initialValue = null
             )
