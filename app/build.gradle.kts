@@ -143,6 +143,15 @@ dependencies {
     testImplementation (libs.jetbrains.kotlinx.coroutines.test)
     testImplementation(libs.mockk)
     kaptTest (libs.hilt.compliler)
+    // Optional -- Robolectric environment
+    testImplementation (libs.robolectric)
+    testImplementation (libs.androidx.core)
+    // Optional -- Mockito framework
+    testImplementation (libs.mockito.core)
+    // Optional -- mockito-kotlin
+    testImplementation (libs.mockito.kotlin)
+    testImplementation (libs.androidx.core.testing)
+
 }
 
 secrets {

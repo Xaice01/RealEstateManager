@@ -6,7 +6,6 @@ import com.xavier_carpentier.realestatemanager.domain.filter.FilterRepository
 import com.xavier_carpentier.realestatemanager.domain.filter.model.FilterDomain
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -23,7 +22,7 @@ class PropertiesFilterRepositoryImpl @Inject constructor(
 ) : FilterRepository{
 
     private val _filterMutableStateFlow = MutableStateFlow<Filter?>(null)
-    private val filterStateFlow :StateFlow<Filter?> = _filterMutableStateFlow
+    val filterStateFlow :StateFlow<Filter?> = _filterMutableStateFlow
     private val filterIsAppliedMutableSharedFlow = MutableStateFlow<Boolean>(false)
 
     override fun setFilter(filter: FilterDomain) {
