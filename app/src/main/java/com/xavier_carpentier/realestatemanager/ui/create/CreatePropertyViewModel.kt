@@ -113,6 +113,9 @@ class CreatePropertyViewModel @Inject constructor(
     }
 
     fun createOrModifyProperty(property: PropertyUi) {
+        if(property.sold && property.soldDate==null){
+            property.soldDate = Calendar.getInstance()
+        }
         _property.value = property
         if (_createMode.value) {
             createProperty(PropertyWithPictureUi(_property.value, _pictures.value))

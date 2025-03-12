@@ -14,7 +14,7 @@ data class PropertyUi(
     val bedroom: Int,
     val description: String,
     val entryDate: Calendar,
-    val soldDate: Calendar?,
+    var soldDate: Calendar?,
     val sold: Boolean,
     val agent: String,
     val interestNearbySchool: Boolean,
