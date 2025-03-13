@@ -17,11 +17,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.xavier_carpentier.realestatemanager.R
 import com.xavier_carpentier.realestatemanager.ui.compose.spinner.Spinner
 import com.xavier_carpentier.realestatemanager.ui.model.CurrencyUi
 import com.xavier_carpentier.realestatemanager.ui.setting.SettingViewModel
@@ -38,9 +40,8 @@ fun SettingScreen(viewModel: SettingViewModel = hiltViewModel()) {
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {
-        // Premier TextView
         Text(
-            text = "Choisissez votre devise",
+            text = stringResource(R.string.choose_your_currency),
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 8.dp)
@@ -68,18 +69,18 @@ fun SettingScreen(viewModel: SettingViewModel = hiltViewModel()) {
         }
 
         Text(
-            text = "Sélectionnez un agent",
+            text = stringResource(R.string.select_agent),
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
         )
 
         // Spinner
-        currentAgent?.let { Spinner(nameList = "Agent", list = agents , preselected = it, onSelectionChanged = { agent -> viewModel.updateAgent(agent)} ) }
+        currentAgent?.let { Spinner(nameList = stringResource(R.string.agent), list = agents , preselected = it, onSelectionChanged = { agent -> viewModel.updateAgent(agent)} ) }
 
 
         Text(
-            text = "Cours actuel du dollar/euro",
+            text = stringResource(R.string.current_exchange_rate_of_the_dollar_euro),
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
@@ -88,7 +89,7 @@ fun SettingScreen(viewModel: SettingViewModel = hiltViewModel()) {
         OutlinedTextField(
             value = currentDollarRate.toString(),
             onValueChange = { viewModel.updateDollarRate(it.toFloat()) },
-            label = { Text("Taux de change") },
+            label = { Text(stringResource(R.string.exchange_rate)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
 

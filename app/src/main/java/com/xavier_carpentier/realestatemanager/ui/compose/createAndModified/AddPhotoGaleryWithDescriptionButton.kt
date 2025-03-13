@@ -19,8 +19,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import com.xavier_carpentier.realestatemanager.R
 import com.xavier_carpentier.realestatemanager.ui.model.PictureUi
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
@@ -44,7 +46,7 @@ fun AddPhotoGaleryWithDescriptionButton(
 
     Column(modifier = Modifier.padding(16.dp)) {
         Button(onClick = { galleryLauncher.launch("image/*") }) {
-            Text("Sélectionner une photo")
+            Text(stringResource(R.string.Select_picture))
         }
 
         AnimatedVisibility(visible = isExpanded) {
@@ -80,7 +82,7 @@ fun AddPhotoGaleryWithDescriptionButton(
 
                     }
                 }) {
-                    Text("Ajouter la photo via la galery")
+                    Text(stringResource(R.string.Add_the_photo_via_the_gallery))
                 }
             }
         }

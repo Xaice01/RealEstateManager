@@ -77,7 +77,7 @@ class CreatePropertyViewModel @Inject constructor(
 
 
     fun initialised(createMode: Boolean) {
-        println("DEBUG: initialisation appelée avec createMode = $createMode")
+        println("DEBUG: Initialization called with createMode = $createMode")
         _createMode.value = createMode
         if (!createMode) {
             viewModelScope.launch {
@@ -92,13 +92,13 @@ class CreatePropertyViewModel @Inject constructor(
                                         PropertyWithPictureUiMapper.mapToUi(result.property)
                                     _property.value = propertyWithPictureUi.propertyUi
                                     _pictures.value = propertyWithPictureUi.picturesUi
-                                    println("DEBUG: Liste des images récupérées depuis le ViewModel: ${_pictures.value.size}")
+                                    println("DEBUG: List of images retrieved from the ViewModel: ${_pictures.value.size}")
                                 }
 
                                 is GetPropertyWithPictureUseCaseResult.Empty -> {
                                     _property.value = propertyWithNullValue
                                     _pictures.value = emptyList()
-                                    println("DEBUG: Aucune image trouvée, liste vidée")
+                                    println("DEBUG: No image found, list cleared")
                                 }
                             }
                         }
@@ -138,9 +138,7 @@ class CreatePropertyViewModel @Inject constructor(
             updatePropertyWithPictureUseCase(
                 PropertyWithPictureUiMapper.mapToDomain(updatedProperty)
             )
-            // Mettre à jour le state local pour refléter la propriété modifiée, si nécessaire
             _property.value = updatedProperty.propertyUi
-            // Signaler que l'opération s'est déroulée avec succès
             _propertyCreated.value = true
 
         }
@@ -149,7 +147,7 @@ class CreatePropertyViewModel @Inject constructor(
     fun addPicture(picture: PictureUi) {
         if(_createMode.value) {
             _pictures.value = (_pictures.value + picture).toList()
-            println("DEBUG: Nouvelle liste de photos: ${_pictures.value.size}") // Ajoute un log pour vérifier la mise à jour
+            println("DEBUG: New photo list: ${_pictures.value.size}") // Add a log to check the update
         }else {
             viewModelScope.launch {
                 insertPictureUseCase(PictureUiMapper.mapToDomain(picture))

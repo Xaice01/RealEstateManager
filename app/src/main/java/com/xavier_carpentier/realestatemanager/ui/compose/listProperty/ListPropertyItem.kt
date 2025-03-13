@@ -24,6 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -55,7 +56,7 @@ fun ListPropertyItem(item: PropertyWithPictureUi, currentUi :CurrencyUi, onClick
         ) {
             Image(
                 bitmap = bitmap.asImageBitmap(),
-                contentDescription = "Item Image",
+                contentDescription = stringResource(R.string.item_image),
                 modifier = Modifier
                     .fillMaxWidth()
                     .heightIn(min = 50.dp, max = 100.dp)
@@ -74,12 +75,12 @@ fun ListPropertyItem(item: PropertyWithPictureUi, currentUi :CurrencyUi, onClick
                     Text(text = item.propertyUi.price.toString()+" "+ currentUi.symbol, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.tertiary)
                 }
                 Spacer(modifier=Modifier.height(4.dp))
-                IconAndText(R.drawable.baseline_location_pin_24,"Location",item.propertyUi.address)
+                IconAndText(R.drawable.baseline_location_pin_24,stringResource(R.string.location),item.propertyUi.address)
                 Spacer(modifier=Modifier.height(4.dp))
                 Row( modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                    IconAndText(R.drawable.outline_dashboard_24,"Rooms",item.propertyUi.room.toString())
-                    IconAndText(R.drawable.baseline_bedroom_24,"Bedrooms",item.propertyUi.bedroom.toString())
-                    IconAndText(R.drawable.baseline_surface_24,"Surface","${item.propertyUi.surface} m²")
+                    IconAndText(R.drawable.outline_dashboard_24,stringResource(R.string.rooms),item.propertyUi.room.toString())
+                    IconAndText(R.drawable.baseline_bedroom_24, stringResource(R.string.bedrooms),item.propertyUi.bedroom.toString())
+                    IconAndText(R.drawable.baseline_surface_24,stringResource(R.string.surface),"${item.propertyUi.surface} m²")
                 }
             }
         }

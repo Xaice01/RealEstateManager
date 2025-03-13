@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">RealEstateManager</string>
+    <string name="app_name" translatable="false">Real Estate Manager</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_loan_simulator">Loan Simulator</string>
+    <string name="loan_simulator">Loan Simulator</string>
     <string name="menu_property">Property</string>
     <string name="menu_map">Map</string>
     <string name="menu_setting">Setting</string>
@@ -76,6 +76,7 @@
     <string name="bedrooms">Bedrooms</string>
     <string name="address">Address</string>
 
+
     <!-- type property -->
     <string name="house">house</string>
     <string name="duplex">duplex</string>
@@ -84,7 +85,57 @@
     <string name="manor">manor</string>
     <string name="villa">villa</string>
     <string name="other">other</string>
-    <string name="all">all</string>
+
+
+    <string name="Select_picture">Select a photo</string>
+    <string name="Add_the_photo_via_the_gallery">Add the photo via the gallery</string>
+    <string name="Take_a_photo">Take a photo</string>
+    <string name="Add_the_photo_via_the_camera">Add the photo via the camera</string>
+    <string name="Property_successfully_created">Property successfully created!</string>
+    <string name="Property_successfully_updated">Property successfully updated!</string>
+    <string name="Failed_to_create_the_property">Failed to create the property.</string>
+    <string name="Create_Property">Create Property</string>
+    <string name="Edit_Property">Edit Property</string>
+    <string name="Property_type">Property type</string>
+    <string name="Price">Price</string>
+    <string name="photo">Photo</string>
+    <string name="delete">delete</string>
+    <string name="Please_add_at_least_one_photo">Please add at least one photo.</string>
+    <string name="Save">Save</string>
+    <string name="context_is_not_an_activity">Context is not an Activity</string>
+
+    <!-- Filtre Screen -->
+    <string name="min_price">Min Price</string>
+    <string name="max_price">Max Price</string>
+    <string name="min_surface">Min Surface</string>
+    <string name="max_surface">Max Surface</string>
+    <string name="property_attribute">Property attribute</string>
+    <string name="cancel">Cancel</string>
+    <string name="reset">Reset</string>
+    <string name="applied">Applied</string>
+    <string name="item_image">Item Image</string>
+    <string name="no_property_available">No property available</string>
+
+    <!-- Loan Simulator Screen -->
+    <string name="loan_amount">Loan Amount</string>
+    <string name="duration_month">Duration (month)</string>
+    <string name="rate">Rate (%)</string>
+    <string name="calculate">Calculate</string>
+    <string name="payment">Payment</string>
+    <string name="monthly_payment">Monthly Payment</string>
+    <string name="annually_payment">Annually Payment</string>
+    <string name="cost_of_loan">Cost of Loan</string>
+
+    <!-- Navigation Screen -->
+    <string name="add_property">Add Property</string>
+    <string name="edit_property">Edit Property</string>
+    <string name="filter">Filter</string>
+
+    <!-- Setting Screen -->
+    <string name="choose_your_currency">Choose your currency</string>
+    <string name="agent">Agent</string>
+    <string name="current_exchange_rate_of_the_dollar_euro">Current exchange rate of the dollar/euro</string>
+    <string name="exchange_rate">Exchange rate</string>
 
 
 </resources>

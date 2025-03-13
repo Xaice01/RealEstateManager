@@ -39,6 +39,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -71,7 +72,7 @@ fun CreateAndModifiedScreen(
     val createMode by viewModel.createMode.collectAsState()
 
     LaunchedEffect(property) {
-        println("DEBUG: Propriété chargée - $property")
+        println("DEBUG: Property loaded - $property")
     }
 
     CreateAndModifiedContent(
@@ -90,19 +91,20 @@ fun CreateAndModifiedScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
+    val context = LocalContext.current
     LaunchedEffect(propertyCreated) {
         propertyCreated?.let { isSuccess ->
             coroutineScope.launch {
                 if (isSuccess) {
                     val message = if (createMode) {
-                        "Propriété créée avec succès !"
+                        context.getString(R.string.Property_successfully_created)
                     } else {
-                        "Propriété modifiée avec succès !"
+                        context.getString(R.string.Property_successfully_updated)
                     }
                     snackbarHostState.showSnackbar(message)
                     onBackNavigation()
                 } else {
-                    snackbarHostState.showSnackbar("Échec de la création de la propriété.")
+                    snackbarHostState.showSnackbar(context.getString(R.string.Failed_to_create_the_property))
                 }
                 viewModel.clearPropertyCreatedState()
             }
@@ -145,6 +147,8 @@ fun CreateAndModifiedContent(
     val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
 
+    val context = LocalContext.current
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -152,15 +156,15 @@ fun CreateAndModifiedContent(
             .padding(16.dp)
     ) {
         if (create){
-            Text("Créer Propriété", style = MaterialTheme.typography.titleLarge)
+            Text(stringResource(R.string.Create_Property), style = MaterialTheme.typography.titleLarge)
         }else{
-            Text("Éditer Propriété", style = MaterialTheme.typography.titleLarge)
+            Text(stringResource(R.string.Edit_Property), style = MaterialTheme.typography.titleLarge)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Spinner(
-            nameList = "Type de propriété",
+            nameList = stringResource(R.string.Property_type),
             list = typeList,
             preselected = selectedType,
             onSelectionChanged = { selectedType = it }
@@ -170,7 +174,7 @@ fun CreateAndModifiedContent(
         OutlinedTextField(
             value = price,
             onValueChange = { price = it },
-            label = { Text("Prix") },
+            label = { Text(stringResource(R.string.Price)) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 4.dp)
@@ -179,27 +183,27 @@ fun CreateAndModifiedContent(
         OutlinedTextField(
             value = address,
             onValueChange = { address = it },
-            label = { Text("Adresse") },
+            label = { Text(stringResource(R.string.address)) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 4.dp)
         )
 
         Row(modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 4.dp),
+            .fillMaxWidth()
+            .padding(vertical = 4.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ){
             OutlinedTextField(
                 value = latitude.toString(),
                 onValueChange = { latitude=it.toDouble() },
-                label = { Text("Latitude") },
+                label = { Text(stringResource(R.string.latitude)) },
                 modifier = Modifier.weight(1f)
             )
             OutlinedTextField(
                 value = longitude.toString(),
                 onValueChange = { longitude= it.toDouble()},
-                label = { Text("Longitude") },
+                label = { Text(stringResource(R.string.longitude)) },
                 modifier = Modifier.weight(1f)
             )
 
@@ -208,7 +212,7 @@ fun CreateAndModifiedContent(
         OutlinedTextField(
             value = surface,
             onValueChange = { surface = it },
-            label = { Text("Surface (m²)") },
+            label = { Text(stringResource(R.string.surface_in_m)) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 4.dp)
@@ -217,7 +221,7 @@ fun CreateAndModifiedContent(
         OutlinedTextField(
             value = room,
             onValueChange = { room = it },
-            label = { Text("Nombre de pièces") },
+            label = { Text(stringResource(R.string.number_of_rooms)) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 4.dp)
@@ -226,7 +230,7 @@ fun CreateAndModifiedContent(
         OutlinedTextField(
             value = bedroom,
             onValueChange = { bedroom = it },
-            label = { Text("Nombre de chambres") },
+            label = { Text(stringResource(R.string.number_of_bedroom)) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 4.dp)
@@ -235,14 +239,14 @@ fun CreateAndModifiedContent(
         OutlinedTextField(
             value = description,
             onValueChange = { description = it },
-            label = { Text("Description") },
+            label = { Text(stringResource(R.string.description)) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 4.dp)
         )
 
         Spinner(
-            nameList = "Agent immobilier",
+            nameList = stringResource(R.string.select_agent),
             list = agentList,
             preselected = selectedAgent,
             onSelectionChanged = { selectedAgent = it },
@@ -252,50 +256,50 @@ fun CreateAndModifiedContent(
         Row(verticalAlignment = Alignment.CenterVertically) {
             Checkbox(checked = sold, onCheckedChange = { sold = it })
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Vendu")
+            Text(stringResource(R.string.sold))
         }
 
-        Text("Centres d'intérêt")
+        Text(stringResource(R.string.interest))
 
         Row(verticalAlignment = Alignment.CenterVertically) {
             Checkbox(checked = interestNearbySchool, onCheckedChange = { interestNearbySchool = it })
             Spacer(modifier = Modifier.width(8.dp))
-            Text("École")
+            Text(stringResource(R.string.school))
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Checkbox(checked = interestNearbyShop, onCheckedChange = { interestNearbyShop = it })
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Magasin")
+            Text(stringResource(R.string.shop))
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Checkbox(checked = interestNearbyPark, onCheckedChange = { interestNearbyPark = it })
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Parc")
+            Text(stringResource(R.string.park))
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Checkbox(checked = interestNearbyRestaurant, onCheckedChange = { interestNearbyRestaurant = it })
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Restaurant")
+            Text(stringResource(R.string.restaurant))
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Checkbox(checked = interestNearbyPublicTransportation, onCheckedChange = { interestNearbyPublicTransportation = it })
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Transport public")
+            Text(stringResource(R.string.transport))
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Checkbox(checked = interestNearbyPharmacy, onCheckedChange = { interestNearbyPharmacy = it })
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Pharmacie")
+            Text(stringResource(R.string.pharmacy))
         }
         
 
-        Text("Photos", modifier = Modifier.padding(top= 16.dp, bottom = 16.dp))
+        Text(stringResource(R.string.photo), modifier = Modifier.padding(top= 16.dp, bottom = 16.dp))
         LazyRow(
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier
         ) {
-            println("DEBUG: LazyRow contient ${pictures.size} photos") // Log pour vérifier le nombre d'éléments
+            println("DEBUG: LazyRow content ${pictures.size} photos") // Log to check the number of items
 
 
             items(pictures) { picture ->
@@ -303,14 +307,14 @@ fun CreateAndModifiedContent(
                     .width(100.dp)
                     .height(166.dp)
                 ){
-                    println("DEBUG: Affichage de la photo avec description: ${picture.description}") // Vérifier que chaque photo passe bien ici
+                    println("DEBUG: Affichage de la photo avec description: ${picture.description}") // Check that each photo passes through here
                     PhotoWithDescription(picture = picture)
                     IconButton(
                         onClick = { onDeletePicture(picture)},
                         modifier = Modifier
                             .align(Alignment.TopEnd)
                     ) {
-                        Icon(Icons.Default.Delete, contentDescription = "Supprimer")
+                        Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.delete))
                     }
 
                 }
@@ -328,7 +332,7 @@ fun CreateAndModifiedContent(
         Button(onClick = {
             if (pictures.isEmpty()) {
                 coroutineScope.launch {
-                    snackbarHostState.showSnackbar("Veuillez ajouter au moins une photo")
+                    snackbarHostState.showSnackbar(context.getString(R.string.Please_add_at_least_one_photo))
                 }
             } else {
                 val propertyUi = property.copy(
@@ -355,7 +359,7 @@ fun CreateAndModifiedContent(
                 onPropertyChange(propertyUi)
             }
         }) {
-            Text("Sauvegarder")
+            Text(stringResource(R.string.Save))
         }
     }
 }

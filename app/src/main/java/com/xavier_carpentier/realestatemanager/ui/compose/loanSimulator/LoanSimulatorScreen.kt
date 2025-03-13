@@ -18,10 +18,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.xavier_carpentier.realestatemanager.R
 import com.xavier_carpentier.realestatemanager.ui.compose.utils.DetailSection
 import com.xavier_carpentier.realestatemanager.ui.compose.utils.TwoTextFieldInRow
 import com.xavier_carpentier.realestatemanager.ui.loanSimulator.LoanSimulatorViewModel
@@ -74,24 +76,24 @@ fun LoanSimulatorContent(
     ) {
 
         DetailSection(
-            title = "Loan Simulator",
+            title = stringResource(R.string.loan_simulator),
             content = {
                 OutlinedTextField(
                     value = loanAmountValue,
                     onValueChange = { onLoanAmountChange(it) },
-                    label = { Text("Loan Amount") },
+                    label = { Text(stringResource(R.string.loan_amount)) },
                     keyboardOptions = KeyboardOptions( keyboardType = KeyboardType.Number)
                 )
                 OutlinedTextField(
                     value = durationValue,
                     onValueChange = { onDurationChange(it) },
-                    label = { Text("Duration (month)") },
+                    label = { Text(stringResource(R.string.duration_month)) },
                     keyboardOptions = KeyboardOptions( keyboardType = KeyboardType.Number)
                 )
                 OutlinedTextField(
                     value = rateValue,
                     onValueChange = { onRateChange(it) },
-                    label = { Text("Rate (%)") },
+                    label = { Text(stringResource(R.string.rate)) },
                     keyboardOptions = KeyboardOptions( keyboardType = KeyboardType.Number)
                 )
 
@@ -100,7 +102,7 @@ fun LoanSimulatorContent(
                     modifier = Modifier.padding(16.dp),
                     elevation = ButtonDefaults.elevatedButtonElevation(defaultElevation = 4.dp),
                 ){
-                    Text("Calculate")
+                    Text(stringResource(R.string.calculate))
                 }
             }
         )
@@ -112,13 +114,13 @@ fun LoanSimulatorContent(
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ){
             DetailSection(
-                title = "Payment",
+                title = stringResource(R.string.payment),
                 content = {
                     TwoTextFieldInRow(
                         firstValue = monthlyPayment,
                         secondValue = annuallyPayment,
-                        firstLabel = "Monthly Payment",
-                        secondLabel = "Annually Payment",
+                        firstLabel = stringResource(R.string.monthly_payment),
+                        secondLabel = stringResource(R.string.annually_payment),
                         onFirstValueChange = {},
                         onSecondValueChange = {},
                         modifier = Modifier.padding(4.dp)
@@ -126,8 +128,8 @@ fun LoanSimulatorContent(
                     TwoTextFieldInRow(
                         firstValue = loanAmountValue,
                         secondValue = costOfLoan,
-                        firstLabel = "Loan Amount",
-                        secondLabel = "Cost of Loan",
+                        firstLabel = stringResource(R.string.loan_amount),
+                        secondLabel = stringResource(R.string.cost_of_loan),
                         onFirstValueChange = {},
                         onSecondValueChange = {},
                         modifier = Modifier.padding(4.dp)

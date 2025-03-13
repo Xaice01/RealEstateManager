@@ -63,7 +63,7 @@ fun DetailScreen(
 ){
     val uiState by viewModel.uiState.collectAsState()
     val windowSizeClass = (LocalContext.current as? Activity)?.let { calculateWindowSizeClass(it) }
-        ?: throw IllegalStateException("Context is not an Activity")
+        ?: throw IllegalStateException(stringResource(R.string.context_is_not_an_activity))
     val screenType = getScreenType(windowSizeClass)
 
 
@@ -189,6 +189,16 @@ fun DetailContentListImage(
 
 @Composable
 fun CharacteristicsOfProperty(property: PropertyUi){
+
+    val interestItems = listOf(
+        stringResource(R.string.school) to property.interestNearbySchool,
+        stringResource(R.string.shop) to property.interestNearbyShop,
+        stringResource(R.string.park) to property.interestNearbyPark,
+        stringResource(R.string.restaurant) to property.interestNearbyRestaurant,
+        stringResource(R.string.transport) to property.interestNearbyPublicTransportation,
+        stringResource(R.string.pharmacy) to property.interestNearbyPharmacy
+    )
+
     Row (modifier = Modifier.padding(start = 16.dp, end = 16.dp), horizontalArrangement = Arrangement.SpaceBetween){
         Column {
             IconAndTextWithTitle(R.drawable.baseline_surface_24,stringResource(R.string.surface),"${property.surface} m²", stringResource(R.string.surface))
@@ -214,16 +224,7 @@ fun CharacteristicsOfProperty(property: PropertyUi){
                 verticalArrangement = Arrangement.Top,
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                items(
-                    listOf(
-                        "School" to property.interestNearbySchool,
-                        "Shop" to property.interestNearbyShop,
-                        "Park" to property.interestNearbyPark,
-                        "Restaurant" to property.interestNearbyRestaurant,
-                        "Public Transport" to property.interestNearbyPublicTransportation,
-                        "Pharmacy" to property.interestNearbyPharmacy
-                    )
-                ) { (interest, interestNearby) ->
+                items(interestItems) { (interest, interestNearby) ->
                     InterestSection(interest = interest, interestNearby = interestNearby)
                 }
             }

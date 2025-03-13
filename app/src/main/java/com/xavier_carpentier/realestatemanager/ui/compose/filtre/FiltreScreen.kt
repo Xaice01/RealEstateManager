@@ -99,7 +99,7 @@ fun FilterContent(
                 ) {
 
                 Text(
-                    text = "Type of property",
+                    text = stringResource(id = R.string.type_property_select),
                     modifier = Modifier.padding(8.dp),
                     style = MaterialTheme.typography.titleMedium
                 )
@@ -127,8 +127,8 @@ fun FilterContent(
                     secondValue = filter.maxPrice.toString(),
                     onFirstValueChange = { onChangeValue(FilterType.MIN_PRICE, it) },
                     onSecondValueChange = { onChangeValue(FilterType.MAX_PRICE, it) },
-                    firstLabel = "Min Price",
-                    secondLabel = "Max Price",
+                    firstLabel = stringResource(R.string.min_price),
+                    secondLabel = stringResource(R.string.max_price),
                     keyboardOptions = KeyboardOptions( keyboardType = KeyboardType.Number)
                 )
 
@@ -137,13 +137,13 @@ fun FilterContent(
                     secondValue = filter.maxSurface.toString(),
                     onFirstValueChange = { onChangeValue(FilterType.MIN_SURFACE, it) },
                     onSecondValueChange = { onChangeValue(FilterType.MAX_SURFACE, it) },
-                    firstLabel = "Min Surface",
-                    secondLabel = "Max Surface",
+                    firstLabel = stringResource(R.string.min_surface),
+                    secondLabel = stringResource(R.string.max_surface),
                     keyboardOptions = KeyboardOptions( keyboardType = KeyboardType.Number)
                 )
 
                 Text(
-                    text = "Property attribute",
+                    text = stringResource(R.string.property_attribute),
                     modifier = Modifier.padding(8.dp),
                     style = MaterialTheme.typography.titleMedium
                 )
@@ -178,7 +178,7 @@ fun FilterContent(
                     modifier = Modifier.wrapContentSize()
                 ) {
                     Text(
-                        "Cancel",
+                        stringResource(R.string.cancel),
                         style= MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onBackground,
                         modifier = Modifier.wrapContentSize()
@@ -189,7 +189,7 @@ fun FilterContent(
                     modifier = Modifier.wrapContentSize()
                 ) {
                     Text(
-                        "Reset",
+                        stringResource(R.string.reset),
                         style= MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onBackground
                     )
@@ -199,7 +199,7 @@ fun FilterContent(
                     modifier = Modifier.wrapContentSize()
                 ) {
                     Text(
-                        "Applied",
+                        stringResource(R.string.applied),
                         style= MaterialTheme.typography.bodySmall
                     )
                 }

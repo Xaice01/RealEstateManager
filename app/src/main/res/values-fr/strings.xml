@@ -1,0 +1,136 @@
+<resources>
+    <string name="navigation_drawer_open">Ouvrir la navigation</string>
+    <string name="navigation_drawer_close">Fermer la navigation</string>
+    <string name="nav_header_desc">En-tête de navigation</string>
+    <string name="action_settings">Paramètres</string>
+
+    <string name="loan_simulator">Simulateur de prêt</string>
+    <string name="menu_property">Propriété</string>
+    <string name="menu_map">Carte</string>
+    <string name="menu_setting">Paramètre</string>
+    <string name="detail">Détail</string>
+    <string name="create_and_modified_property">Créer ou Modifier une Propriété</string>
+    <string name="create_home_fabButton">Bouton FAB de création</string>
+    <string name="detail_screen_error">Erreur lors du chargement de l\'écran de détail</string>
+
+    <!-- Noms des agents -->
+    <string-array name="agent_names">
+        <item>Agent 1</item>
+        <item>Agent 2</item>
+        <item>Agent 3</item>
+    </string-array>
+
+    <!-- Types de propriétés -->
+    <string-array name="type_property">
+        <item>Maison</item>
+        <item>Duplex</item>
+        <item>Penthouse</item>
+        <item>Appartement</item>
+        <item>Manoir</item>
+        <item>Villa</item>
+    </string-array>
+
+    <!-- Création de propriété -->
+    <string name="sold_textview">Vendu :</string>
+    <string name="type_property_select">Sélectionnez un type de propriété</string>
+    <string name="property_address_hint">Adresse</string>
+    <string name="description_property">Description de la propriété</string>
+    <string name="select_agent">Sélectionnez un agent</string>
+    <string name="import_picture_button">Importer une image</string>
+    <string name="take_picture_button">Prendre une photo</string>
+    <string name="create_button">Créer une propriété</string>
+    <string name="sold">Vendu</string>
+    <string name="empty">Vide</string>
+    <string name="success">Succès</string>
+    <string name="school">École</string>
+    <string name="shop">Magasin</string>
+    <string name="park">Parc</string>
+    <string name="pharmacy">Pharmacie</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="transport">Transport</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="price_in">Prix en $</string>
+    <string name="surface_in_m">Surface en m²</string>
+    <string name="room_number">Nombre de pièces</string>
+    <string name="bedroom_number">Nombre de chambres</string>
+    <string name="interest">Intérêts</string>
+    <string name="static_google_map">Carte Google statique</string>
+    <string name="modify">Modifier</string>
+    <string name="image_surface">Image de la surface</string>
+    <string name="image_number_of_room">Image du nombre de pièces</string>
+    <string name="image_number_of_bedroom">Image du nombre de chambres</string>
+    <string name="image_location">Image de la localisation</string>
+    <string name="description">Description</string>
+    <string name="number_of_rooms">Nombre de pièces</string>
+    <string name="surface">Surface</string>
+    <string name="number_of_rooms_text">Nombre de pièces</string>
+    <string name="number_of_bedroom">Nombre de chambres</string>
+    <string name="location">Localisation</string>
+    <string name="media">Médias</string>
+    <string name="open_nav">Ouvrir la navigation</string>
+    <string name="close_nav">Fermer la navigation</string>
+    <string name="characteristics">Caractéristiques</string>
+    <string name="rooms">Pièces</string>
+    <string name="bedrooms">Chambres</string>
+    <string name="address">Adresse</string>
+
+    <!-- Types de propriété -->
+    <string name="house">maison</string>
+    <string name="duplex">duplex</string>
+    <string name="penthouse">penthouse</string>
+    <string name="flat">appartement</string>
+    <string name="manor">manoir</string>
+    <string name="villa">villa</string>
+    <string name="other">autre</string>
+
+    <string name="Select_picture">Sélectionnez une photo</string>
+    <string name="Add_the_photo_via_the_gallery">Ajouter la photo depuis la galerie</string>
+    <string name="Take_a_photo">Prendre une photo</string>
+    <string name="Add_the_photo_via_the_camera">Ajouter la photo via l\'appareil photo</string>
+    <string name="Property_successfully_created">Propriété créée avec succès !</string>
+    <string name="Property_successfully_updated">Propriété modifiée avec succès !</string>
+    <string name="Failed_to_create_the_property">Échec de la création de la propriété.</string>
+    <string name="Create_Property">Créer une propriété</string>
+    <string name="Edit_Property">Modifier la propriété</string>
+    <string name="Property_type">Type de propriété</string>
+    <string name="Price">Prix</string>
+    <string name="photo">Photo</string>
+    <string name="delete">supprimer</string>
+    <string name="Please_add_at_least_one_photo">Veuillez ajouter au moins une photo.</string>
+    <string name="Save">Sauvegarder</string>
+    <string name="context_is_not_an_activity">Le contexte n\'est pas une activité</string>
+
+    <!-- Écran de filtrage -->
+    <string name="min_price">Prix min</string>
+    <string name="max_price">Prix max</string>
+    <string name="min_surface">Surface min</string>
+    <string name="max_surface">Surface max</string>
+    <string name="property_attribute">Attribut de propriété</string>
+    <string name="cancel">Annuler</string>
+    <string name="reset">Réinitialiser</string>
+    <string name="applied">Appliqué</string>
+    <string name="item_image">Image de l\'article</string>
+    <string name="no_property_available">Aucune propriété disponible</string>
+
+    <!-- Écran Simulateur de prêt -->
+    <string name="loan_amount">Montant du prêt</string>
+    <string name="duration_month">Durée (mois)</string>
+    <string name="rate">Taux (%)</string>
+    <string name="calculate">Calculer</string>
+    <string name="payment">Paiement</string>
+    <string name="monthly_payment">Paiement mensuel</string>
+    <string name="annually_payment">Paiement annuel</string>
+    <string name="cost_of_loan">Coût du prêt</string>
+
+    <!-- Écran Navigation -->
+    <string name="add_property">Ajouter une propriété</string>
+    <string name="edit_property">Modifier la propriété</string>
+    <string name="filter">Filtrer</string>
+
+    <!-- Écran Paramètres -->
+    <string name="choose_your_currency">Choisissez votre devise</string>
+    <string name="agent">Agent</string>
+    <string name="current_exchange_rate_of_the_dollar_euro">Taux de change actuel du dollar/euro</string>
+    <string name="exchange_rate">Taux de change</string>
+</resources>

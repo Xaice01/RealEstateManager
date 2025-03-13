@@ -62,12 +62,12 @@ fun NavigationScreen(viewModel: MainViewModel = hiltViewModel(), windowSizeClass
         topBar = {
             TopAppBar(
                 colors= TopAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer,scrolledContainerColor = MaterialTheme.colorScheme.primaryContainer, navigationIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,actionIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer),
-                title = { Text("Real Estate Manager") },
+                title = { Text(stringResource(R.string.app_name)) },
                 actions = {
                     IconButton(onClick = { navController.navigate("CreateAndModified/true") }) {
                         Icon(
                             painter = painterResource(R.drawable.baseline_add_home_24),
-                            contentDescription = "Add Property"
+                            contentDescription = stringResource(R.string.add_property)
                         )
                     }
                     AnimatedVisibility(
@@ -78,7 +78,7 @@ fun NavigationScreen(viewModel: MainViewModel = hiltViewModel(), windowSizeClass
                         IconButton(onClick = { navController.navigate("CreateAndModified/false") }) {
                             Icon(
                                 painter = painterResource(R.drawable.baseline_edit_24),
-                                contentDescription = "Edit Property"
+                                contentDescription = stringResource(R.string.edit_property)
                             )
                         }
                     }
@@ -90,7 +90,7 @@ fun NavigationScreen(viewModel: MainViewModel = hiltViewModel(), windowSizeClass
                             }else{
                                 painterResource(R.drawable.baseline_filter_list_24)
                             },
-                            contentDescription = "Filter"
+                            contentDescription = stringResource(R.string.filter)
                         )
                     }
                 }
