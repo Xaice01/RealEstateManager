@@ -116,7 +116,8 @@ fun FilterContent(
                             label = stringResource(id = propertyTypeCheckable.propertyTypeUi.third),
                             checked = propertyTypeCheckable.checked,
                             onCheckedChange = { checked ->
-                                onCheckedPropertyType(propertyTypeCheckable, checked)}
+                                onCheckedPropertyType(propertyTypeCheckable, checked)
+                            }
                         )
 
                     }
@@ -129,7 +130,7 @@ fun FilterContent(
                     onSecondValueChange = { onChangeValue(FilterType.MAX_PRICE, it) },
                     firstLabel = stringResource(R.string.min_price),
                     secondLabel = stringResource(R.string.max_price),
-                    keyboardOptions = KeyboardOptions( keyboardType = KeyboardType.Number)
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
 
                 TwoOutlinedTextFieldInRow(
@@ -139,7 +140,7 @@ fun FilterContent(
                     onSecondValueChange = { onChangeValue(FilterType.MAX_SURFACE, it) },
                     firstLabel = stringResource(R.string.min_surface),
                     secondLabel = stringResource(R.string.max_surface),
-                    keyboardOptions = KeyboardOptions( keyboardType = KeyboardType.Number)
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
 
                 Text(
@@ -165,43 +166,44 @@ fun FilterContent(
                         )
                     }
                 }
-            }
 
-            Row(
-                modifier= Modifier
-                    .fillMaxWidth()
-                    .padding(top = 24.dp),
-                horizontalArrangement = Arrangement.SpaceAround
-            ) {
-                TextButton(
-                    onClick = {onFilterApplied(null)},
-                    modifier = Modifier.wrapContentSize()
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 24.dp),
+                    horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                    Text(
-                        stringResource(R.string.cancel),
-                        style= MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onBackground,
+                    TextButton(
+                        onClick = { onFilterApplied(null) },
                         modifier = Modifier.wrapContentSize()
-                    )
-                }
-                OutlinedButton(
-                    onClick = {onFilterApplied(false)},
-                    modifier = Modifier.wrapContentSize()
-                ) {
-                    Text(
-                        stringResource(R.string.reset),
-                        style= MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                }
-                Button(
-                    onClick = {onFilterApplied(true)},
-                    modifier = Modifier.wrapContentSize()
-                ) {
-                    Text(
-                        stringResource(R.string.applied),
-                        style= MaterialTheme.typography.bodySmall
-                    )
+                    ) {
+                        Text(
+                            stringResource(R.string.cancel),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier.wrapContentSize()
+                        )
+                    }
+                    OutlinedButton(
+                        onClick = { onFilterApplied(false) },
+                        modifier = Modifier.wrapContentSize()
+                    ) {
+                        Text(
+                            stringResource(R.string.reset),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onBackground
+                        )
+                    }
+                    Button(
+                        onClick = { onFilterApplied(true) },
+                        modifier = Modifier.wrapContentSize()
+                    ) {
+                        Text(
+                            stringResource(R.string.applied),
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
                 }
             }
         }
