@@ -19,6 +19,7 @@ import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.MarkerInfoWindowContent
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
@@ -76,11 +77,12 @@ fun MapContent(
     properties: List<PropertyWithPictureUi>,
     currencyUi : CurrencyUi,
     onClick: (item :PropertyWithPictureUi) -> Unit,
-    location : LatLng
+    location : LatLng,
+    initialZoom : Float = 8f,
 ){
 
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(location, 5f)
+        position = CameraPosition.fromLatLngZoom(location, initialZoom)
     }
 
     var isMapLoaded by remember { mutableStateOf(false) }
@@ -88,8 +90,8 @@ fun MapContent(
     GoogleMap(
         modifier = Modifier.fillMaxSize(),
         onMapLoaded = { isMapLoaded = true },
-        cameraPositionState = cameraPositionState
-
+        cameraPositionState = cameraPositionState,
+        properties = MapProperties(isMyLocationEnabled = true),
     ){
         for (item in properties) {
 
